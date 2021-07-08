@@ -11,7 +11,7 @@
     "post": "Post"
   },
     "login": {
-        "status": true
+        "status": "boolean"
     }
     
 }
