@@ -10,7 +10,7 @@
     "body": "string",
     "post": "Post"
   },
-    "login": {
+    "Login": {
         "status": "boolean"
     }
     
