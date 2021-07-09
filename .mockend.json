@@ -1,8 +1,11 @@
 {
 "Post": {
     "title": "string",
-    "views": "int",
+    "postOwner": "string",
+    "description": "string",
+    "commentCount": "int",
     "published": "boolean",
+    "lastModifiedAt": "date",
     "createdAt": "date",
     "comments": "Comment[]"
   },
