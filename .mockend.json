@@ -10,7 +10,9 @@
     "comments": "Comment[]"
   },
   "Comment": {
-    "body": "string",
+    "commentMessage": "string",
+    "commenter": "string",
+    "createdAt": "date",
     "post": "Post"
   },
     "Login": {
