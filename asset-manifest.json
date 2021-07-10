@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/mcube/static/css/main.902b174a.chunk.css",
-    "main.js": "/mcube/static/js/main.7c0fd751.chunk.js",
-    "main.js.map": "/mcube/static/js/main.7c0fd751.chunk.js.map",
-    "runtime-main.js": "/mcube/static/js/runtime-main.e63cce5c.js",
-    "runtime-main.js.map": "/mcube/static/js/runtime-main.e63cce5c.js.map",
+    "main.css": "/mcube/static/css/main.21fd56a6.chunk.css",
+    "main.js": "/mcube/static/js/main.a83ae2c0.chunk.js",
+    "main.js.map": "/mcube/static/js/main.a83ae2c0.chunk.js.map",
+    "runtime-main.js": "/mcube/static/js/runtime-main.5f888f2c.js",
+    "runtime-main.js.map": "/mcube/static/js/runtime-main.5f888f2c.js.map",
     "static/css/2.c22c300c.chunk.css": "/mcube/static/css/2.c22c300c.chunk.css",
-    "static/js/2.0e5a8af7.chunk.js": "/mcube/static/js/2.0e5a8af7.chunk.js",
-    "static/js/2.0e5a8af7.chunk.js.map": "/mcube/static/js/2.0e5a8af7.chunk.js.map",
-    "static/js/3.4fd2184a.chunk.js": "/mcube/static/js/3.4fd2184a.chunk.js",
-    "static/js/3.4fd2184a.chunk.js.map": "/mcube/static/js/3.4fd2184a.chunk.js.map",
+    "static/js/2.b48cdb59.chunk.js": "/mcube/static/js/2.b48cdb59.chunk.js",
+    "static/js/2.b48cdb59.chunk.js.map": "/mcube/static/js/2.b48cdb59.chunk.js.map",
+    "static/js/3.5912ff6f.chunk.js": "/mcube/static/js/3.5912ff6f.chunk.js",
+    "static/js/3.5912ff6f.chunk.js.map": "/mcube/static/js/3.5912ff6f.chunk.js.map",
     "index.html": "/mcube/index.html",
     "static/css/2.c22c300c.chunk.css.map": "/mcube/static/css/2.c22c300c.chunk.css.map",
-    "static/css/main.902b174a.chunk.css.map": "/mcube/static/css/main.902b174a.chunk.css.map",
-    "static/js/2.0e5a8af7.chunk.js.LICENSE.txt": "/mcube/static/js/2.0e5a8af7.chunk.js.LICENSE.txt",
+    "static/css/main.21fd56a6.chunk.css.map": "/mcube/static/css/main.21fd56a6.chunk.css.map",
+    "static/js/2.b48cdb59.chunk.js.LICENSE.txt": "/mcube/static/js/2.b48cdb59.chunk.js.LICENSE.txt",
     "static/media/chat.ef1a0e19.png": "/mcube/static/media/chat.ef1a0e19.png",
     "static/media/forum.9a616d35.png": "/mcube/static/media/forum.9a616d35.png",
     "static/media/logo.b709ff81.svg": "/mcube/static/media/logo.b709ff81.svg",
@@ -21,10 +21,10 @@
     "static/media/search.80bb57d2.png": "/mcube/static/media/search.80bb57d2.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.e63cce5c.js",
+    "static/js/runtime-main.5f888f2c.js",
     "static/css/2.c22c300c.chunk.css",
-    "static/js/2.0e5a8af7.chunk.js",
-    "static/css/main.902b174a.chunk.css",
-    "static/js/main.7c0fd751.chunk.js"
+    "static/js/2.b48cdb59.chunk.js",
+    "static/css/main.21fd56a6.chunk.css",
+    "static/js/main.a83ae2c0.chunk.js"
   ]
 }
