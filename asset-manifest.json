@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/mcube/static/css/main.4d4fb62c.chunk.css",
-    "main.js": "/mcube/static/js/main.009ef965.chunk.js",
-    "main.js.map": "/mcube/static/js/main.009ef965.chunk.js.map",
+    "main.css": "/mcube/static/css/main.de2385d0.chunk.css",
+    "main.js": "/mcube/static/js/main.4c8bca24.chunk.js",
+    "main.js.map": "/mcube/static/js/main.4c8bca24.chunk.js.map",
     "runtime-main.js": "/mcube/static/js/runtime-main.e63cce5c.js",
     "runtime-main.js.map": "/mcube/static/js/runtime-main.e63cce5c.js.map",
     "static/css/2.c22c300c.chunk.css": "/mcube/static/css/2.c22c300c.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.4fd2184a.chunk.js.map": "/mcube/static/js/3.4fd2184a.chunk.js.map",
     "index.html": "/mcube/index.html",
     "static/css/2.c22c300c.chunk.css.map": "/mcube/static/css/2.c22c300c.chunk.css.map",
-    "static/css/main.4d4fb62c.chunk.css.map": "/mcube/static/css/main.4d4fb62c.chunk.css.map",
+    "static/css/main.de2385d0.chunk.css.map": "/mcube/static/css/main.de2385d0.chunk.css.map",
     "static/js/2.ff976707.chunk.js.LICENSE.txt": "/mcube/static/js/2.ff976707.chunk.js.LICENSE.txt",
     "static/media/chat.ef1a0e19.png": "/mcube/static/media/chat.ef1a0e19.png",
     "static/media/forum.9a616d35.png": "/mcube/static/media/forum.9a616d35.png",
@@ -24,7 +24,7 @@
     "static/js/runtime-main.e63cce5c.js",
     "static/css/2.c22c300c.chunk.css",
     "static/js/2.ff976707.chunk.js",
-    "static/css/main.4d4fb62c.chunk.css",
-    "static/js/main.009ef965.chunk.js"
+    "static/css/main.de2385d0.chunk.css",
+    "static/js/main.4c8bca24.chunk.js"
   ]
 }
