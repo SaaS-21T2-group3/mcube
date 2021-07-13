@@ -1,22 +1,22 @@
 {
 "Post": {
-    "title": "string",
-    "postOwner": "string",
-    "description": "string",
-    "commentCount": "int",
-    "published": "boolean",
-    "lastModifiedAt": "date",
-    "createdAt": "date",
-    "comments": "Comment[]"
+    "title": string,
+    "postOwner": string,
+    "description": string,
+    "commentCount": int,
+    "published": boolean,
+    "lastModifiedAt": date,
+    "createdAt": date,
+    "comments": Comment[]
   },
   "Comment": {
-    "commentMessage": "string",
-    "commenter": "string",
-    "createdAt": "date",
-    "post": "Post"
+    "commentMessage": string,
+    "commenter": string,
+    "createdAt": date,
+    "post": Post
   },
     "Login": {
-        "status": "boolean"
+        "status": boolean
     }
     
 }
