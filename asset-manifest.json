@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/mcube/static/css/main.41ad6162.chunk.css",
+    "main.css": "/mcube/static/css/main.4a626564.chunk.css",
     "main.js": "/mcube/static/js/main.4251fccc.chunk.js",
     "main.js.map": "/mcube/static/js/main.4251fccc.chunk.js.map",
     "runtime-main.js": "/mcube/static/js/runtime-main.9bdd8c5f.js",
@@ -12,7 +12,7 @@
     "static/js/3.56030f96.chunk.js.map": "/mcube/static/js/3.56030f96.chunk.js.map",
     "index.html": "/mcube/index.html",
     "static/css/2.b2dde87e.chunk.css.map": "/mcube/static/css/2.b2dde87e.chunk.css.map",
-    "static/css/main.41ad6162.chunk.css.map": "/mcube/static/css/main.41ad6162.chunk.css.map",
+    "static/css/main.4a626564.chunk.css.map": "/mcube/static/css/main.4a626564.chunk.css.map",
     "static/js/2.ef3e77a1.chunk.js.LICENSE.txt": "/mcube/static/js/2.ef3e77a1.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/mcube/static/media/banner.4e9aa8c9.jpg",
     "static/media/chat.ef1a0e19.png": "/mcube/static/media/chat.ef1a0e19.png",
@@ -26,7 +26,7 @@
     "static/js/runtime-main.9bdd8c5f.js",
     "static/css/2.b2dde87e.chunk.css",
     "static/js/2.ef3e77a1.chunk.js",
-    "static/css/main.41ad6162.chunk.css",
+    "static/css/main.4a626564.chunk.css",
     "static/js/main.4251fccc.chunk.js"
   ]
 }
