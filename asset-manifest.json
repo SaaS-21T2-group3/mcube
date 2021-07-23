@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/mcube/static/css/main.7d38e3b3.chunk.css",
-    "main.js": "/mcube/static/js/main.ed7eafb1.chunk.js",
-    "main.js.map": "/mcube/static/js/main.ed7eafb1.chunk.js.map",
+    "main.css": "/mcube/static/css/main.60df003c.chunk.css",
+    "main.js": "/mcube/static/js/main.7277aaad.chunk.js",
+    "main.js.map": "/mcube/static/js/main.7277aaad.chunk.js.map",
     "runtime-main.js": "/mcube/static/js/runtime-main.df9f5763.js",
     "runtime-main.js.map": "/mcube/static/js/runtime-main.df9f5763.js.map",
     "static/css/2.f4387aba.chunk.css": "/mcube/static/css/2.f4387aba.chunk.css",
-    "static/js/2.c2beaa64.chunk.js": "/mcube/static/js/2.c2beaa64.chunk.js",
-    "static/js/2.c2beaa64.chunk.js.map": "/mcube/static/js/2.c2beaa64.chunk.js.map",
+    "static/js/2.e9d63665.chunk.js": "/mcube/static/js/2.e9d63665.chunk.js",
+    "static/js/2.e9d63665.chunk.js.map": "/mcube/static/js/2.e9d63665.chunk.js.map",
     "static/js/3.858bdc58.chunk.js": "/mcube/static/js/3.858bdc58.chunk.js",
     "static/js/3.858bdc58.chunk.js.map": "/mcube/static/js/3.858bdc58.chunk.js.map",
     "index.html": "/mcube/index.html",
     "static/css/2.f4387aba.chunk.css.map": "/mcube/static/css/2.f4387aba.chunk.css.map",
-    "static/css/main.7d38e3b3.chunk.css.map": "/mcube/static/css/main.7d38e3b3.chunk.css.map",
-    "static/js/2.c2beaa64.chunk.js.LICENSE.txt": "/mcube/static/js/2.c2beaa64.chunk.js.LICENSE.txt",
-    "static/media/App.scss": "/mcube/static/media/banner.4e9aa8c9.jpg",
+    "static/css/main.60df003c.chunk.css.map": "/mcube/static/css/main.60df003c.chunk.css.map",
+    "static/js/2.e9d63665.chunk.js.LICENSE.txt": "/mcube/static/js/2.e9d63665.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/mcube/static/media/banner.4bab9184.jpg",
     "static/media/chat.ef1a0e19.png": "/mcube/static/media/chat.ef1a0e19.png",
     "static/media/forum.9a616d35.png": "/mcube/static/media/forum.9a616d35.png",
     "static/media/homeBgVideo.f5200985.mp4": "/mcube/static/media/homeBgVideo.f5200985.mp4",
@@ -25,8 +25,8 @@
   "entrypoints": [
     "static/js/runtime-main.df9f5763.js",
     "static/css/2.f4387aba.chunk.css",
-    "static/js/2.c2beaa64.chunk.js",
-    "static/css/main.7d38e3b3.chunk.css",
-    "static/js/main.ed7eafb1.chunk.js"
+    "static/js/2.e9d63665.chunk.js",
+    "static/css/main.60df003c.chunk.css",
+    "static/js/main.7277aaad.chunk.js"
   ]
 }
