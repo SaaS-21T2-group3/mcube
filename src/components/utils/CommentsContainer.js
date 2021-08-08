@@ -21,46 +21,7 @@ import { getRequest } from 'Config/axiosClient';
 import { useInterval } from 'components/tools/useInterval';
 
 const { TextArea } = Input;
-const data = [
-  {
-    actions: [],
-    author: 'Han Solo',
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    content: (
-      <p>
-        We supply a series of design principles, practical patterns and high
-        quality design resources (Sketch and Axure), to help people create their
-        product prototypes beautifully and efficiently.
-      </p>
-    ),
-    datetime: (
-      <Tooltip
-        title={moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')}
-      >
-        <span>{moment().subtract(1, 'days').fromNow()}</span>
-      </Tooltip>
-    ),
-  },
-  {
-    actions: [],
-    author: 'Han Solo',
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    content: (
-      <p>
-        We supply a series of design principles, practical patterns and high
-        quality design resources (Sketch and Axure), to help people create their
-        product prototypes beautifully and efficiently.
-      </p>
-    ),
-    datetime: (
-      <Tooltip
-        title={moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')}
-      >
-        <span>{moment().subtract(1, 'days').fromNow()}</span>
-      </Tooltip>
-    ),
-  },
-];
+
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
     <Form.Item className='comment-input-wrapper'>
@@ -126,6 +87,7 @@ export default function CommentsContainer({ postId, defaultComments = [] }) {
     setNewComment(e.target.value);
   };
   const handleInfiniteOnLoad = (e) => {};
+  console.log(comments);
   return (
     <Space direction='vertical' className='comment-list-spacer'>
       <div className='comments-infinite-container'>
@@ -141,6 +103,7 @@ export default function CommentsContainer({ postId, defaultComments = [] }) {
             dataSource={[...comments]}
             renderItem={(item) => (
               <List.Item key={item.comment_id}>
+                {console.log(item)}
                 <List.Item.Meta
                   avatar={
                     <Avatar
@@ -155,7 +118,7 @@ export default function CommentsContainer({ postId, defaultComments = [] }) {
                       <AppTexts
                         containerStyles='comment-name-container'
                         className='medium'
-                        content={`${item.first_name || 'first name'} ${
+                        content={`${item.first_name || 'firname'} ${
                           item.last_name || 'last name'
                         }`}
                       ></AppTexts>

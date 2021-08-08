@@ -20,6 +20,7 @@ export default function UserMessager({ contact, handleBack, collapsed }) {
   const { messages } = useSelector((state) => state.messageReducer);
   const [submitting, setSubmitting] = useState(false);
   const [newComment, setNewComment] = useState('');
+  console.log(messages);
   useEffect(() => {
     dispatch({
       type: actions.GET_MESSAGES,

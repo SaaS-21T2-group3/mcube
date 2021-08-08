@@ -48,12 +48,10 @@ function* getMessages(action) {
         toUser: action.toUser,
       });
     } else {
-      notification['error']({
-        message: 'Failed to Get Messages',
-        description: response?.data?.message,
-        placement: 'bottomRight',
+      yield put({
+        type: actions.GETMESSAGES_FAILURE,
+        toUser: action.toUser,
       });
-      yield put({ type: actions.GETMESSAGES_FAILURE });
     }
   } catch (e) {
     yield put({ type: actions.GETMESSAGES_FAILURE });

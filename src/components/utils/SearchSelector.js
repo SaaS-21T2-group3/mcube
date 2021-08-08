@@ -6,6 +6,7 @@ import searcher from 'components/tools/searcher';
 export default function SearchSelector({ handleChange }) {
   const [data, setdata] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+
   useEffect(() => {
     const response = getRequest('project/name_list');
     response.then((response) => {
@@ -14,6 +15,7 @@ export default function SearchSelector({ handleChange }) {
         key: element.project_id,
         value: element.project_name,
       }));
+
       setdata(data);
       setFilteredData(data);
     });

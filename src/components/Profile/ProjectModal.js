@@ -130,12 +130,12 @@ function ProjectModal({
                       <>
                         <Avatar
                           style={{
-                            backgroundColor: getRandomColor(data?.created_by),
+                            backgroundColor: getRandomColor(data?.first_name),
                           }}
                           size={30}
                           icon={<UserOutlined />}
                         />{' '}
-                        {data?.created_by}
+                        {`${data?.first_name} ${data?.last_name}`}
                       </>
                     }
                   />
@@ -156,10 +156,15 @@ function ProjectModal({
                   >
                     {collaborators &&
                       collaborators.map((value) => (
-                        <Tooltip title={value} placement='bottom'>
+                        <Tooltip
+                          title={`${value.first_name} ${value.last_name}`}
+                          placement='bottom'
+                        >
                           <Avatar
                             style={{
-                              backgroundColor: getRandomColor(value),
+                              backgroundColor: getRandomColor(
+                                `${value.first_name} ${value.last_name}`,
+                              ),
                             }}
                             size={30}
                             icon={<UserOutlined />}

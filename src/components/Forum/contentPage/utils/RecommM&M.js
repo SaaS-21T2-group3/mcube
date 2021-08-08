@@ -69,11 +69,9 @@ export default function RecommMM({
               </Button>,
             ]}
           >
-            {' '}
-            {defaultText}
+            <div style={{ display: 'flex', flex: 1 }}> {defaultText}</div>
             <Divider />
             <Space wrap>
-              <AppTitles content='Skills:' />
               {skills
                 .substring(1, skills.length - 1)
                 .split(',')
