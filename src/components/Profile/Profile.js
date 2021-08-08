@@ -86,7 +86,11 @@ function Profile({ user_id }) {
   };
 
   function openChatModule() {
-    history.push('/messages');
+    history.push({
+      pathname: '/messages',
+      search: `?talk=${user_id ? user_id : userId}`,
+      state: { userId: user_id ? user_id : userId },
+    });
   }
 
   const openLinkedinInNewTab = (url) => {

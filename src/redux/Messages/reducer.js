@@ -2,6 +2,8 @@ import actions from 'redux/Messages/actions';
 const initialState = {
   contacts: [],
   messages: {},
+  tempContact: [],
+  allUsers: [],
   // isAuthenticated: sessionStorage.getItem('userToken'),
   // loader: false,
   // authToken: sessionStorage.getItem('userToken'),
@@ -17,7 +19,7 @@ function Reducer(state = initialState, action) {
       else return state;
 
     case actions.GETMESSAGES_SUCCESS:
-      let newMessages = { ...state.messages };
+      var newMessages = { ...state.messages };
       newMessages[action.toUser] = action.messages;
       return {
         ...state,
@@ -25,6 +27,17 @@ function Reducer(state = initialState, action) {
           ...newMessages,
         },
       };
+    case actions.GETMESSAGES_FAILURE:
+      var newMessages = { ...state.messages };
+      newMessages[action.toUser] = [];
+      return {
+        ...state,
+        messages: {
+          ...newMessages,
+        },
+      };
+    case actions.FORCEUPDATE:
+      return { ...state, [action.payload.item]: action.payload.value };
     case actions.POSTMESSAGE_SUCCESS:
       return { ...state, contacts: action.contacts };
     // case actions.POSTMESSAGE_FAILURE:
