@@ -36,6 +36,7 @@ export default function MessagesPage() {
     setSelectedAcontact(activeContact?.user_id);
     return () => {};
   }, [activeContact]);
+
   useEffect(() => {
     let existingUsers = [...contacts, ...tempContact].map(
       (contact) => contact.user_id,
@@ -47,8 +48,39 @@ export default function MessagesPage() {
       type: actions.FORCEUPDATE,
       payload: { item: 'tempContact', value: nonExiting },
     });
+    var id = `U_${location?.state?.userId}`;
+
+    if (id) {
+      console.log('Had Loca ID', id);
+      let existingUsers = [...contacts, ...tempContact].map(
+        (contact) => contact.user_id,
+      );
+      if (existingUsers.includes(id)) {
+        var user = [...contacts, ...tempContact].filter((item) => {
+          return item.user_id === id;
+        });
+        console.log(user);
+        setActiveContact(user[0]);
+        setSelectedAcontact(user[0].user_id);
+      } else {
+        var user = allUsers.filter((item) => {
+          return item.user_id === id;
+        });
+        dispatch({
+          type: actions.FORCEUPDATE,
+          payload: { item: 'tempContact', value: [...tempContact, ...user] },
+        });
+        console.log('new user', user);
+        setActiveContact(user[0]);
+        setSelectedAcontact(user[0]?.user_id);
+      }
+
+      // setdata(nonExiting);
+      // setFilteredData(nonExiting);
+    }
     return () => {};
   }, [contacts]);
+
   useEffect(() => {
     dispatch({
       type: actions.GETCONTACTS,
@@ -155,13 +187,13 @@ export default function MessagesPage() {
                         // icon={<UserOutlined />}
                       >
                         {truncateName(
-                          `${contact.first_name} ${contact.last_name}`,
+                          `${contact?.first_name} ${contact?.last_name}`,
                         )}
                       </Avatar>
                     }
                   >
                     <Tooltip title={contact.first_name} placement='right'>
-                      {`${contact.first_name} ${contact.last_name}`}
+                      {`${contact?.first_name} ${contact?.last_name}`}
                     </Tooltip>
                   </Menu.Item>
                 ))
