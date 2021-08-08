@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import actions from 'redux/Forum/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
-import Feed from './utils/Feed';
 import { Row, Empty } from 'antd';
-import Buttons from 'components/utils/Buttons';
 import UserCard from './utils/UserCard';
 import ProjectCard from './utils/ProjectCard';
 import ProjectModal from 'components/Profile/ProjectModal';
@@ -48,11 +46,11 @@ export default function Search() {
     setData(results);
     return () => {};
   }, [searchData]);
-  const addMoreFeeds = () => {
-    setData([...getDummy()]);
-    doSearch();
-    return () => {};
-  };
+  // const addMoreFeeds = () => {
+  //   setData([...getDummy()]);
+  //   doSearch();
+  //   return () => {};
+  // };
 
   const handleMoreDetails = (type, id) => {
     console.log(type, id);

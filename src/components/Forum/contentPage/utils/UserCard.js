@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Skeleton, Card, Avatar, Tag, Col } from 'antd';
 import { ExpandOutlined, UserOutlined } from '@ant-design/icons';
 import { getRandomColor } from 'components/tools/colorGenerator';
-import AppTexts from 'components/utils/AppTexts';
 import Buttons from 'components/utils/Buttons';
 import UserModal from 'components/utils/UserModal';
 

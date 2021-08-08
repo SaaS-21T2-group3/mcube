@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Menu, Tooltip, Avatar, Empty, Divider } from 'antd';
+import { Layout, Menu, Tooltip, Avatar, Empty } from 'antd';
 import UserDetails from './UserDetails';
 import UserMessager from './utils/UserMessager';
 import { truncateName } from 'components/tools/getTruncatedName';

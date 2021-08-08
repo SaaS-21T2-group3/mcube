@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { UserOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import {
   Row,
   Col,

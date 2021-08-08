@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Buttons from 'components/utils/Buttons';
 import { PlusOutlined } from '@ant-design/icons';
 import { Row, Col, Input, Select } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import actions from 'redux/Forum/actions';
 const { Search } = Input;
-const { Option } = Select;
-let selectOptions = [
-  { key: 'timestamp', value: 'timestamp', label: 'Sort by created date' },
-  {
-    key: 'last_modified',
-    value: 'last_modified',
-    label: 'Sort by modified date',
-  },
-];
+// const { Option } = Select;
+// let selectOptions = [
+//   { key: 'timestamp', value: 'timestamp', label: 'Sort by created date' },
+//   {
+//     key: 'last_modified',
+//     value: 'last_modified',
+//     label: 'Sort by modified date',
+//   },
+// ];
 export default function ForumPhFeedsExtras() {
   const dispatch = useDispatch();
   const { addPostDraftState, feedSortBy, feedSearchString } = useSelector(
@@ -25,12 +25,12 @@ export default function ForumPhFeedsExtras() {
       payload: { label: 'addPostDraftState', value: !addPostDraftState },
     });
   };
-  function onChange(value) {
-    dispatch({
-      type: actions.FORCEUPDATE,
-      payload: { item: 'feedSortBy', value: value },
-    });
-  }
+  // function onChange(value) {
+  //   dispatch({
+  //     type: actions.FORCEUPDATE,
+  //     payload: { item: 'feedSortBy', value: value },
+  //   });
+  // }
 
   const updateSearchString = (value) => {
     dispatch({

@@ -75,7 +75,6 @@ export default function Feed({
                     content={`${firstName || 'Amel '} ${lastName || 'Johny'}`}
                   ></AppTexts>
 
-                  <AppTexts className='mediumlarge' content={title}></AppTexts>
                   <Tooltip
                     placement='left'
                     title={moment()
@@ -83,11 +82,14 @@ export default function Feed({
                       .format('YYYY-MM-DD HH:mm:ss')}
                   >
                     <AppTexts
+                      containerStyles='nomargin'
+                      className='xsmall text-light feed-time nomargin'
                       content={moment(new Date(createdAt * 1000))
                         .subtract(0, 'days')
                         .fromNow()}
                     />
                   </Tooltip>
+                  <AppTexts className='medium' content={title}></AppTexts>
                 </>
               }
               description={<AppTexts content={description} />}

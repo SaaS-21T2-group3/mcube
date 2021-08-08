@@ -12,6 +12,7 @@ export default function MessageSearchSelect({ setActive }) {
   const { contacts, allUsers, tempContact } = useSelector(
     (state) => state.messageReducer,
   );
+  // eslint-disable-next-line
   useEffect(() => {
     const response = getRequest('user/name_list/');
     response.then((response) => {
@@ -20,15 +21,18 @@ export default function MessageSearchSelect({ setActive }) {
         key: element.user_id,
         value: `${element.first_name} ${element.last_name}`,
       }));
+      // eslint-disable-next-line
       let existingUsers = [...contacts, ...tempContact].map(
         (contact) => contact.user_id,
       );
+
       let nonExiting = data.filter((data) => !existingUsers.includes(data.key));
       setdata(nonExiting);
       setFilteredData(nonExiting);
     });
     return () => {};
-  }, []);
+    // eslint-disable-next-line
+  }, [contacts, tempContact]);
   const handleSearch = (value) => {
     let searchResult = searcher(value, data, ['label']);
     setFilteredData(searchResult);

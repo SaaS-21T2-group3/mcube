@@ -3,7 +3,7 @@ import actions from 'redux/Forum/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
 import RecommMM from './utils/RecommM&M';
-import { Space, Empty, Row } from 'antd';
+import { Empty, Row } from 'antd';
 import Buttons from 'components/utils/Buttons';
 import RecommProjects from './utils/RecommProjects';
 import ProjectModal from 'components/Profile/ProjectModal';
@@ -39,6 +39,7 @@ export default function Recommendations() {
       params: { user_id: userId, recommType: recommselectedtype },
     });
     return () => {};
+    //// eslint-disable-next-line
   }, [recommselectedtype, dispatch]);
 
   const addMoreRecomm = () => {
@@ -104,7 +105,7 @@ export default function Recommendations() {
         <InfiniteScroll
           pageStart={0}
           initialLoad={false}
-          loadMore={() => addMoreRecomm()}
+          // loadMore={() => addMoreRecomm()}
           hasMore={true || false}
           // element={ListWrapper}
           loader={
