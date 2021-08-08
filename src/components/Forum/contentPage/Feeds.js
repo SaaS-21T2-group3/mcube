@@ -61,7 +61,7 @@ export default function Feeds() {
     let filteredContent = searcher(
       feedSearchString,
       [...contentFeeds],
-      ['post_title'],
+      ['title'],
     );
     let sortedContent = sorter([...filteredContent], feedSortBy);
     setData(sortedContent);
@@ -108,26 +108,29 @@ export default function Feeds() {
           threshold={100}
         >
           <Space size={10} className='full-wide' direction='vertical'>
-            {data.map((feed, index) => (
-              <Feed
-                key={feed.post_id}
-                index={index}
-                project_id={feed.project_id}
-                firstName={capitalize(feed.user_first_name)}
-                lastName={capitalize(feed.user_last_name)}
-                title={feed.post_title || 'Default Post Title'}
-                description={feed.post_content}
-                lastModified={feed.post_last_modified}
-                createdAt={feed.timestamp}
-                postOwner={feed.postOwner}
-                commentCount={feed.comments?.length || 0}
-                comments={feed.comments}
-                loading={feed?.loading}
-                postId={feed.post_id}
-                userId={feed.user_id}
-                handleClick={handleMoreDetails}
-              />
-            ))}
+            {data.map((feed, index) => {
+              console.log(feed);
+              return (
+                <Feed
+                  key={feed.post_id}
+                  index={index}
+                  project_id={feed.project_id}
+                  firstName={capitalize(feed.first_name)}
+                  lastName={capitalize(feed.last_name)}
+                  title={feed.title || 'Default Post Title'}
+                  description={feed.content}
+                  lastModified={feed.last_modified}
+                  createdAt={feed.timestamp}
+                  postOwner={feed.user_id}
+                  commentCount={feed.comments?.length || 0}
+                  comments={feed.comments}
+                  loading={feed?.loading}
+                  postId={feed.post_id}
+                  userId={feed.user_id}
+                  handleClick={handleMoreDetails}
+                />
+              );
+            })}
           </Space>
         </InfiniteScroll>
       </>
