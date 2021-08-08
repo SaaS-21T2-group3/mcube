@@ -28,12 +28,12 @@ function Reducer(state = initialState, action) {
         },
       };
     case actions.GETMESSAGES_FAILURE:
-      var newMessages = { ...state.messages };
-      newMessages[action.toUser] = [];
+      var newMessages2 = { ...state.messages };
+      newMessages2[action.toUser] = [];
       return {
         ...state,
         messages: {
-          ...newMessages,
+          ...newMessages2,
         },
       };
     case actions.FORCEUPDATE:
@@ -55,8 +55,8 @@ const shallowCompare = (a, b) => {
       return false;
     }
   }
-  for (var key in b) {
-    if (!(key in a)) {
+  for (var key2 in b) {
+    if (!(key2 in a)) {
       return false;
     }
   }

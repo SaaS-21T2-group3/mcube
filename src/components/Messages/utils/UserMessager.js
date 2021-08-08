@@ -28,6 +28,7 @@ export default function UserMessager({ contact, handleBack, collapsed }) {
       fromUser: userId,
     });
     return () => {};
+    // eslint-disable-next-line
   }, []);
   useEffect(() => {
     dispatch({
@@ -36,6 +37,7 @@ export default function UserMessager({ contact, handleBack, collapsed }) {
       fromUser: userId,
     });
     return () => {};
+    // eslint-disable-next-line
   }, [contact]);
   useInterval(() => {
     // put your interval code here.

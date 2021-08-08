@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Tooltip,
-  Input,
-  Form,
-  List,
-  Spin,
-  Avatar,
-  Space,
-  notification,
-} from 'antd';
+import { Input, Form, List, Spin, Avatar, Space, notification } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import moment from 'moment';
 import AppTexts from './AppTexts';

@@ -3,7 +3,6 @@ import { Avatar, Space, Skeleton, Tag, Col, Button, Card, Divider } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { ExpandOutlined } from '@ant-design/icons';
 import { getRandomColor } from 'components/tools/colorGenerator';
-import AppTitles from 'components/utils/AppTitles';
 import UserModal from 'components/utils/UserModal';
 
 const defaultText =
