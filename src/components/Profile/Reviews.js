@@ -20,7 +20,6 @@ import {
   CloseCircleOutlined,
   SendOutlined,
 } from '@ant-design/icons';
-import SectionDivider from '../utils/SectionDivider';
 import Buttons from '../utils/Buttons';
 import ViewWrapper from 'components/Forum/contentPage/utils/ViewWrapper';
 import { getRandomColor } from '../tools/colorGenerator';
