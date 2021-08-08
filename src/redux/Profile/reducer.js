@@ -4,6 +4,8 @@ const initialState = {
   profileData: null,
   userId: null,
   skillList: [],
+  skillErrorMessage: '',
+  skillDisplayError: false,
   userProjectList: [],
   userSkillList: [],
 };
@@ -18,8 +20,6 @@ function Reducer(state = initialState, action) {
     //PROJECTS
     case actions.GETUSERPROJECTS_SUCCESS:
       return { ...state, userProjectList: action.data.data };
-    case actions.CREATEUSERPROJECT_SUCCESS:
-      return { ...state };
     //SKILLS
     case actions.GETSKILLS_SUCCESS:
       return {
@@ -35,11 +35,11 @@ function Reducer(state = initialState, action) {
     case actions.ADDSKILL_ERROR:
       return {
         ...state,
+        skillErrorMessage: action.data.message,
+        skillDisplayError: true,
       };
     case actions.GETUSERSKILLS_SUCCESS:
       return { ...state, userSkillList: [...action.data.data] };
-    case actions.UPDATEUSERSKILLS_SUCCESS:
-      return { ...state };
     //REVIEWS
     case actions.GETUSERREVIEWS_SUCCESS:
       return { ...state, userReviewsList: [...action.data.data] };

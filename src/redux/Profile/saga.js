@@ -50,30 +50,6 @@ function* getUserProjects(action) {
   }
 }
 
-function* addUserProject(action) {
-  try {
-    const response = yield call(() =>
-      postRequest(
-        `project/${action.payload.user_id}`,
-        action.payload.project_details,
-      ),
-    );
-    if (response.status === 200) {
-      notification['success']({
-        message: 'Added new project',
-        description: response?.data?.message,
-        placement: 'bottomRight',
-      });
-      yield put({
-        type: actions.CREATEUSERPROJECT_SUCCESS,
-        data: response.data,
-      });
-    } else throw response.statusText;
-  } catch (e) {
-    yield put({ type: actions.CREATEUSERPROJECT_FAILURE, e });
-  }
-}
-
 function* getSkills(action) {
   try {
     const response = yield call(() => getRequest('skill'));
@@ -90,21 +66,11 @@ function* addSkill(action) {
     const response = yield call(() =>
       postRequest(`skill/${action.payload.skill}`),
     );
-    if (response.status === 200 && response.data.success === true) {
-      notification['success']({
-        message: 'Added new skill',
-        description: response?.data?.message,
-        placement: 'bottomRight',
-      });
+    if (response.status === 200 && response.data.success === true)
       yield put({ type: actions.ADDSKILL_SUCCESS, data: response.data });
-    } else if (response.status === 200 && response.data.success === false) {
-      notification['error']({
-        message: 'Error while adding new skill',
-        description: response?.data?.message,
-        placement: 'bottomRight',
-      });
+    else if (response.status === 200 && response.data.success === false)
       yield put({ type: actions.ADDSKILL_ERROR, data: response.data });
-    } else throw response.statusText;
+    else throw response.statusText;
   } catch (e) {
     yield put({ type: actions.ADDSKILL_FAILURE, e });
   }
@@ -120,30 +86,6 @@ function* getUserSkills(action) {
     else throw response.statusText;
   } catch (e) {
     yield put({ type: actions.GETUSERSKILLS_FAILURE, e });
-  }
-}
-
-function* updateUserSkills(action) {
-  try {
-    const response = yield call(() =>
-      putRequest(
-        `user/skills/${action.payload.user_id}`,
-        action.payload.skills,
-      ),
-    );
-    if (response.status === 200) {
-      notification['info']({
-        message: 'Updated user skills',
-        description: response?.data?.message,
-        placement: 'bottomRight',
-      });
-      yield put({
-        type: actions.UPDATEUSERSKILLS_SUCCESS,
-        data: response.data,
-      });
-    } else throw response.statusText;
-  } catch (e) {
-    yield put({ type: actions.UPDATEUSERSKILLS_FAILURE, e });
   }
 }
 
@@ -165,11 +107,9 @@ export default function* rootSaga() {
     takeLatest(actions.GETUSERDETAILS, getUserDetails),
     takeLatest(actions.EDITUSERDETAILS, editUserDetails),
     takeLatest(actions.GETUSERPROJECTS, getUserProjects),
-    takeLatest(actions.CREATEUSERPROJECT, addUserProject),
     takeLatest(actions.GETSKILLS, getSkills),
     takeLatest(actions.ADDSKILL, addSkill),
     takeLatest(actions.GETUSERSKILLS, getUserSkills),
-    takeLatest(actions.UPDATEUSERSKILLS, updateUserSkills),
     takeLatest(actions.GETUSERREVIEWS, getUserReviews),
   ]);
 }

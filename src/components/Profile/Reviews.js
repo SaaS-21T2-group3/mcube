@@ -12,15 +12,8 @@ import {
   Input,
 } from 'antd';
 import actions from 'redux/Profile/actions';
-import {
-  UserOutlined,
-  EditOutlined,
-  PlusOutlined,
-  CloseCircleOutlined,
-  SendOutlined,
-} from '@ant-design/icons';
-import Buttons from '../utils/Buttons';
-import ViewWrapper from 'components/Forum/contentPage/utils/ViewWrapper';
+import { UserOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import SectionDivider from '../utils/SectionDivider';
 import { getRandomColor } from '../tools/colorGenerator';
 
 function Reviews() {
