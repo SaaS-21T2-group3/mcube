@@ -16,8 +16,10 @@ function Skills({ user_id }) {
   const [skillListComponent, setSkillListComponent] = useState(null);
   const [addSkill, setAddSkill] = useState('');
   const dispatch = useDispatch();
-
   const { userId } = useSelector((state) => state.authenticateReducer);
+
+  const { skillList, skillErrorMessage, skillDisplayError, userSkillList } =
+    useSelector((state) => state.profileReducer);
 
   useEffect(() => {
     dispatch({
@@ -29,7 +31,7 @@ function Skills({ user_id }) {
         user_id: user_id ? user_id : userId,
       },
     });
-  }, []);
+  }, [user_id]);
 
   const { skillList, userSkillList } = useSelector(
     (state) => state.profileReducer,
@@ -105,6 +107,13 @@ function Skills({ user_id }) {
       },
     });
   };
+
+  //ASK AMEL
+  /* if (skillDisplayError === true) {
+    openNotification('success', skillErrorMessage);
+  } else if (skillDisplayError ===  false){
+    openNotification('error', skillErrorMessage);
+  }*/
 
   return (
     <>
