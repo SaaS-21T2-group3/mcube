@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Select, Tag, Button, PageHeader } from 'antd';
 import SectionDivider from '../utils/SectionDivider';
-import { Input, Tooltip, notification } from 'antd';
+import { Input, Tooltip } from 'antd';
 import { InfoCircleOutlined, TagsOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import actions from 'redux/Profile/actions';
@@ -17,22 +17,8 @@ function Skills({ user_id }) {
   const [addSkill, setAddSkill] = useState('');
   const dispatch = useDispatch();
 
-  const { skillList, userSkillList } = useSelector(
-    (state) => state.profileReducer,
-  );
   const { userId } = useSelector((state) => state.authenticateReducer);
 
-  useEffect(() => {
-    dispatch({
-      type: actions.GETSKILLS,
-    });
-    dispatch({
-      type: actions.GETUSERSKILLS,
-      payload: {
-        user_id: userId,
-      },
-    });
-  }, []);
   useEffect(() => {
     dispatch({
       type: actions.GETSKILLS,
@@ -44,6 +30,10 @@ function Skills({ user_id }) {
       },
     });
   }, []);
+
+  const { skillList, userSkillList } = useSelector(
+    (state) => state.profileReducer,
+  );
 
   useEffect(() => {
     let SkillListComponent1 = null;
@@ -59,6 +49,20 @@ function Skills({ user_id }) {
 
   useEffect(() => {
     let tagsList1 = null;
+    tagsList1 = userSkillList.map(function (tag, index) {
+      return (
+        <Tag key={index} color={getRandomColor(tag)}>
+          {tag}
+        </Tag>
+      );
+    });
+    setTagsList(tagsList1);
+  }, []);
+
+  function handleChange(value) {
+    //console.log(`selected ${value}`);
+    setTags(value);
+    let tagsList1 = null;
     tagsList1 = tags.map(function (tag, index) {
       return (
         <Tag key={index} color={getRandomColor(tag)}>
@@ -67,11 +71,6 @@ function Skills({ user_id }) {
       );
     });
     setTagsList(tagsList1);
-  }, [tags]);
-
-  function handleChange(value) {
-    //console.log(`selected ${value}`);
-    setTags(value);
   }
 
   function addNewSkillFunc() {
@@ -87,19 +86,23 @@ function Skills({ user_id }) {
   }
 
   const updateUserSkillList = () => {
-    // dispatch({
-    //   type: actions.ADDSKILL,
-    //   payload: {
-    //     : ,
-    //   },
-    // });
-  };
-
-  const openNotification = (type, description) => {
-    notification[type]({
-      message: type,
-      description: description,
-      placement: 'bottomRight',
+    console.log('update to ', tags);
+    let resultTags = {};
+    for (let i = 0; i < tags.length; i++) {
+      resultTags[i] = tags[i];
+    }
+    dispatch({
+      type: actions.UPDATEUSERSKILLS,
+      payload: {
+        user_id: userId,
+        skills: resultTags,
+      },
+    });
+    dispatch({
+      type: actions.GETUSERSKILLS,
+      payload: {
+        user_id: userId,
+      },
     });
   };
 
