@@ -24,27 +24,44 @@ import Buttons from '../utils/Buttons';
 import ViewWrapper from 'components/Forum/contentPage/utils/ViewWrapper';
 import { getRandomColor } from '../tools/colorGenerator';
 
-function Reviews() {
+function Reviews({ user_id }) {
   const { Panel } = Collapse;
   const { TextArea } = Input;
   const dispatch = useDispatch();
+  const [data, setData] = useState(null);
 
-  const { userReviewsList } = useSelector((state) => state.profileReducer);
+  const { userReviewsList, userReviewsListTemp } = useSelector(
+    (state) => state.profileReducer,
+  );
   const { userId } = useSelector((state) => state.authenticateReducer);
   const [newReviewToggle, setNewReviewToggle] = useState(false);
   useEffect(() => {
-    dispatch({
-      type: actions.GETUSERREVIEWS,
-      payload: {
-        user_id: userId,
-      },
-    });
+    user_id
+      ? dispatch({
+          type: actions.GETTEMPUSERREVIEWS,
+          payload: {
+            user_id: user_id,
+          },
+        })
+      : dispatch({
+          type: actions.GETUSERREVIEWS,
+          payload: {
+            user_id: userId,
+          },
+        });
   }, []);
-
+  useEffect(() => {
+    if (user_id) {
+      setData(userReviewsListTemp[user_id]);
+    } else {
+      setData(userReviewsList);
+    }
+    return () => {};
+  }, [userReviewsList, userReviewsListTemp]);
   const toggleNewReview = () => {
     setNewReviewToggle(!newReviewToggle);
   };
-
+  console.log(userReviewsList, userReviewsListTemp);
   return (
     <>
       <PageHeader
@@ -96,7 +113,7 @@ function Reviews() {
         className='demo-loadmore-list'
         style={{ minHeight: '350px' }}
         itemLayout='horizontal'
-        dataSource={userReviewsList}
+        dataSource={data || []}
         renderItem={(item) => (
           <div className='list-card'>
             <Row className='feedback-itam'>

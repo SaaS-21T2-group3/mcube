@@ -4,6 +4,7 @@ import { postRequest, getRequest, putRequest } from 'Config/axiosClient';
 import { notification } from 'antd';
 
 function* getUserDetails(action) {
+  console.log('getting userdetails');
   try {
     const response = yield call(() =>
       getRequest(`user/${action.payload.user_id}`),
@@ -13,6 +14,22 @@ function* getUserDetails(action) {
     } else throw response.statusText;
   } catch (e) {
     yield put({ type: actions.GETUSERDETAILS_FAILURE, e });
+  }
+}
+function* getTempUserDetails(action) {
+  try {
+    const response = yield call(() =>
+      getRequest(`user/${action.payload.user_id}`),
+    );
+    if (response.status === 200) {
+      yield put({
+        type: actions.GETTEMPUSERDETAILS_SUCCESS,
+        data: response.data,
+        userId: action.payload.user_id,
+      });
+    } else throw response.statusText;
+  } catch (e) {
+    yield put({ type: actions.GETTEMPUSERDETAILS_FAILURE, e });
   }
 }
 
@@ -49,7 +66,22 @@ function* getUserProjects(action) {
     yield put({ type: actions.GETUSERPROJECTS_FAILURE, e });
   }
 }
-
+function* getTempUserProjects(action) {
+  try {
+    const response = yield call(() =>
+      getRequest(`user/projects/${action.payload.user_id}`),
+    );
+    if (response.status === 200)
+      yield put({
+        type: actions.GETTEMPUSERPROJECTS_SUCCESS,
+        data: response.data,
+        userId: action.payload.user_id,
+      });
+    else throw response.statusText;
+  } catch (e) {
+    yield put({ type: actions.GETTEMPUSERPROJECTS_FAILURE, e });
+  }
+}
 function* addUserProject(action) {
   try {
     const response = yield call(() =>
@@ -159,17 +191,36 @@ function* getUserReviews(action) {
     yield put({ type: actions.GETUSERREVIEWS_FAILURE, e });
   }
 }
+function* getTempUserReviews(action) {
+  try {
+    const response = yield call(() =>
+      getRequest(`user/review/${action.payload.user_id}`),
+    );
+    if (response.status === 200)
+      yield put({
+        type: actions.GETTEMPUSERREVIEWS_SUCCESS,
+        data: response.data,
+        userId: action.payload.user_id,
+      });
+    else throw response.statusText;
+  } catch (e) {
+    yield put({ type: actions.GETUSERREVIEWS_FAILURE, e });
+  }
+}
 
 export default function* rootSaga() {
   yield all([
     takeLatest(actions.GETUSERDETAILS, getUserDetails),
+    takeLatest(actions.GETTEMPUSERDETAILS, getTempUserDetails),
     takeLatest(actions.EDITUSERDETAILS, editUserDetails),
     takeLatest(actions.GETUSERPROJECTS, getUserProjects),
+    takeLatest(actions.GETTEMPUSERPROJECTS, getTempUserProjects),
     takeLatest(actions.CREATEUSERPROJECT, addUserProject),
     takeLatest(actions.GETSKILLS, getSkills),
     takeLatest(actions.ADDSKILL, addSkill),
     takeLatest(actions.GETUSERSKILLS, getUserSkills),
     takeLatest(actions.UPDATEUSERSKILLS, updateUserSkills),
     takeLatest(actions.GETUSERREVIEWS, getUserReviews),
+    takeLatest(actions.GETTEMPUSERREVIEWS, getTempUserReviews),
   ]);
 }

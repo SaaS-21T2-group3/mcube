@@ -8,26 +8,44 @@ import actions from 'redux/Profile/actions';
 import AddProjectModal from './AddProjectModal';
 import { PlusOutlined } from '@ant-design/icons';
 
-function Projects() {
+function Projects({ user_id }) {
   const dispatch = useDispatch();
   const [projectId, setProjectId] = useState('');
   const [isProjectModalVisible, setIsProjectModalVisible] = useState(false);
+  const [data, setData] = useState(null);
   const [isAddProjectModalVisible, setIsAddProjectModalVisible] =
     useState(false);
   const [itemsArray, setItemsArray] = useState([1, 2, 3]);
   const [hasMoreContents, setHasMoreContents] = useState(true);
 
-  const { userProjectList } = useSelector((state) => state.profileReducer);
+  const { userProjectList, userProjectListTemp } = useSelector(
+    (state) => state.profileReducer,
+  );
   const { userId } = useSelector((state) => state.authenticateReducer);
 
   useEffect(() => {
-    dispatch({
-      type: actions.GETUSERPROJECTS,
-      payload: {
-        user_id: userId,
-      },
-    });
+    user_id
+      ? dispatch({
+          type: actions.GETTEMPUSERPROJECTS,
+          payload: {
+            user_id: user_id,
+          },
+        })
+      : dispatch({
+          type: actions.GETUSERPROJECTS,
+          payload: {
+            user_id: userId,
+          },
+        });
   }, []);
+  useEffect(() => {
+    if (user_id) {
+      setData(userProjectListTemp[user_id]);
+    } else {
+      setData(userProjectList);
+    }
+    return () => {};
+  }, [userProjectListTemp, userProjectList]);
 
   const openProjectModel = (projectId) => {
     console.log(projectId);
@@ -56,7 +74,7 @@ function Projects() {
       setHasMoreContents(false);
     }
   };
-
+  console.log(userProjectListTemp);
   return (
     <>
       <ProjectModal
@@ -100,7 +118,7 @@ function Projects() {
         }
       >
         <Row gutter={[16, 16]}>
-          {userProjectList.map((i, index) => (
+          {data?.map((i, index) => (
             <ProjectCard
               key={index}
               project_data={i}

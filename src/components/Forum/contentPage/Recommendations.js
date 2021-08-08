@@ -71,6 +71,7 @@ export default function Recommendations() {
   };
 
   const handleMoreDetails = (type, id) => {
+    console.log(id);
     setIdForModal(id);
     if (type === 'project_id') {
       setIsProjectModalVisible(true);
@@ -97,7 +98,7 @@ export default function Recommendations() {
         />
         <UserModal
           isModalVisible={isUserModalVisible}
-          projectId={idForModal}
+          userID={idForModal}
           handleCancel={handleCancel}
         />
         <InfiniteScroll

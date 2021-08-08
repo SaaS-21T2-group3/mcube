@@ -26,20 +26,40 @@ function Profile({ user_id }) {
 
   // const [userId, setUserId] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const { profileData } = useSelector((state) => state.profileReducer);
+  const [data, setData] = useState(null);
   const { userId } = useSelector((state) => state.authenticateReducer);
+
+  const { profileData, profileDataTemp } = useSelector(
+    (state) => state.profileReducer,
+  );
+  console.log(user_id);
   useEffect(() => {
-    dispatch({
-      type: actions.GETUSERDETAILS,
-      payload: {
-        user_id: user_id ? user_id : userId,
-      },
-    });
+    user_id
+      ? dispatch({
+          type: actions.GETTEMPUSERDETAILS,
+          payload: {
+            user_id: user_id,
+          },
+        })
+      : dispatch({
+          type: actions.GETUSERDETAILS,
+          payload: {
+            user_id: userId,
+          },
+        });
   }, []);
 
-  var interestsList = profileData?.interest?.topic
-    .substring(1, profileData?.interest?.topic.length - 1)
+  useEffect(() => {
+    if (user_id) {
+      setData(profileDataTemp[user_id]);
+    } else {
+      setData(profileData);
+    }
+    return () => {};
+  }, [profileDataTemp, profileData]);
+
+  var interestsList = data?.interest?.topic
+    .substring(1, data?.interest?.topic.length - 1)
     .split(',')
     .map(function (interest) {
       return (
@@ -48,6 +68,9 @@ function Profile({ user_id }) {
         </Tag>
       );
     });
+  let skillsList = data?.skill?.map((skil) => (
+    <Tag color={getRandomColor(skil.skill_name)}>{skil.skill_name}</Tag>
+  ));
 
   // const handleClick = () => {
   //   openEditUsertModel('userId');
@@ -73,8 +96,8 @@ function Profile({ user_id }) {
   const openMailInNewTab = (url) => {
     window.open(`mailto: ${url}`, '_blank');
   };
-
-  return profileData ? (
+  console.log(data, profileDataTemp);
+  return data ? (
     <ViewWrapper grid={true}>
       {user_id === undefined && (
         <EditProfileModal
@@ -108,19 +131,24 @@ function Profile({ user_id }) {
           <div>
             <AppTitles
               className='large'
-              content={`${profileData?.profile?.first_name}
-                ${profileData?.profile?.last_name}`}
+              content={`${data?.profile?.first_name}
+                ${data?.profile?.last_name}`}
               style={{
                 fontWeight: 'bold',
               }}
             />
             <AppTexts
               className='medium italics'
-              content={`Title: ${profileData?.profile?.title}`}
+              content={`Title: ${data?.profile?.title}`}
             />
             <div className='italics' style={{ marginLeft: '1%' }}>
               Interests: {interestsList}
             </div>
+            {user_id && (
+              <div className='italics' style={{ marginLeft: '1%' }}>
+                skills: {skillsList}
+              </div>
+            )}
           </div>
         </Col>
         <Col
@@ -143,10 +171,10 @@ function Profile({ user_id }) {
             <AppTitles
               size='small'
               content={`
-              ${profileData?.profile?.city} ,
-              ${profileData?.profile?.state},
-              ${profileData?.profile?.country},
-              ${profileData?.profile?.zipcode}`}
+              ${data?.profile?.city} ,
+              ${data?.profile?.state},
+              ${data?.profile?.country},
+              ${data?.profile?.zipcode}`}
             />
           </Row>
 
@@ -165,7 +193,7 @@ function Profile({ user_id }) {
               icon={<MailOutlined />}
               size={20}
               style={{ margin: '4px' }}
-              onClick={() => openMailInNewTab(profileData?.profile?.email)}
+              onClick={() => openMailInNewTab(data?.profile?.email)}
             />
             <Button
               type='dashed'
@@ -173,7 +201,7 @@ function Profile({ user_id }) {
               icon={<LinkedinOutlined />}
               size={20}
               style={{ margin: '4px' }}
-              onClick={() => openLinkedinInNewTab(profileData?.profile?.links)}
+              onClick={() => openLinkedinInNewTab(data?.profile?.links)}
             />
             <Button
               type='dashed'
@@ -183,7 +211,7 @@ function Profile({ user_id }) {
             >
               <Paragraph
                 copyable={{
-                  text: profileData?.profile?.mobile_no,
+                  text: data?.profile?.mobile_no,
                   icon: [
                     <PhoneOutlined key='copy-icon' />,
                     <PhoneFilled key='copied-icon' />,
@@ -204,7 +232,7 @@ function Profile({ user_id }) {
           </Button>
         </Col>
       </Row>
-      <AppTabs />
+      <AppTabs user_id={user_id} />
     </ViewWrapper>
   ) : null;
 }

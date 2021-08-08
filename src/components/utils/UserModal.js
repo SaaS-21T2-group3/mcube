@@ -16,7 +16,7 @@ function UserModal({ isModalVisible, userID, handleCancel }) {
       },
     });
   }
-
+  console.log(id);
   return (
     <Modal
       title='User Profile'
@@ -29,7 +29,7 @@ function UserModal({ isModalVisible, userID, handleCancel }) {
         height: '80%',
       }}
     >
-      <Profile user_id={id} />
+      {id ? <Profile user_id={id} /> : null}
     </Modal>
   );
 }
