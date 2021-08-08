@@ -72,14 +72,9 @@ export default function RecommMM({
             <div style={{ display: 'flex', flex: 1 }}> {defaultText}</div>
             <Divider />
             <Space wrap>
-              {skills
-                .substring(1, skills.length - 1)
-                .split(',')
-                .map((skill) => (
-                  <Tag color='#2db7f5'>
-                    {skill.substring(1, skill.length - 1)}
-                  </Tag>
-                ))}
+              {skills?.split(',').map((skill) => (
+                <Tag color='#2db7f5'>{skill}</Tag>
+              ))}
             </Space>
             <Tag className='card-user-type' color='#3ca6b5'>
               User
