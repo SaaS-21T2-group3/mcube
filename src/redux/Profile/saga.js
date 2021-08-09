@@ -68,7 +68,7 @@ function* editUserDetails(action) {
         description: response?.data?.message,
         placement: 'bottomRight',
       });
-      yield put({ type: actions.EDITUSERDETAILS_SUCCESS, data: response.data });
+      yield put({ type: actions.GETUSERDETAILS });
     } else throw response.statusText;
   } catch (e) {
     yield put({ type: actions.EDITUSERDETAILS_FAILURE, e });
@@ -174,7 +174,7 @@ function* addSkill(action) {
         description: response?.data?.message,
         placement: 'bottomRight',
       });
-      yield put({ type: actions.ADDSKILL_SUCCESS, data: response.data });
+      yield put({ type: actions.GETSKILLS });
     } else if (response.status === 200 && response.data.success === false) {
       notification['error']({
         message: 'Error while adding new skill',
@@ -189,10 +189,13 @@ function* addSkill(action) {
 }
 
 function* getUserSkills(action) {
+  console.log('calling Saga');
   try {
     const response = yield call(() =>
       getRequest(`user/skills/${action.payload.user_id}`),
     );
+    console.log('calling Saga', response);
+
     if (response.status === 200)
       yield put({ type: actions.GETUSERSKILLS_SUCCESS, data: response.data });
     else throw response.statusText;
@@ -216,8 +219,10 @@ function* updateUserSkills(action) {
         placement: 'bottomRight',
       });
       yield put({
-        type: actions.UPDATEUSERSKILLS_SUCCESS,
-        data: response.data,
+        type: actions.GETUSERSKILLS,
+        payload: {
+          user_id: action.payload.user_id,
+        },
       });
     } else throw response.statusText;
   } catch (e) {
@@ -265,7 +270,12 @@ function* addUserReview(action) {
         description: response?.data?.message,
         placement: 'bottomRight',
       });
-      yield put({ type: actions.ADDUSERREVIEW_SUCCESS, data: response.data });
+      yield put({
+        type: actions.GETUSERREVIEWS,
+        payload: {
+          user_id: action.payload.toUserID,
+        },
+      });
     } else throw response.statusText;
   } catch (e) {
     yield put({ type: actions.ADDUSERREVIEW_FAILURE, e });

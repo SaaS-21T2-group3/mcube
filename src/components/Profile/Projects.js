@@ -88,6 +88,7 @@ function Projects({ user_id }) {
         handleAddProjectModalCancel={handleAddProjectModalCancel}
       />
       <PageHeader
+        className='forum-page-header'
         title='Projects'
         extra={
           user_id === undefined

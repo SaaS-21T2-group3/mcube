@@ -80,18 +80,13 @@ function Reviews({ user_id }) {
         toUserID: Number(user_id),
       },
     });
-    dispatch({
-      type: actions.GETTEMPUSERREVIEWS,
-      payload: {
-        user_id: Number(user_id),
-      },
-    });
     setData(userReviewsListTemp[user_id]);
   };
 
   return (
     <>
       <PageHeader
+        className='forum-page-header'
         title='Reviews'
         extra={
           user_id !== undefined
@@ -177,7 +172,11 @@ function Reviews({ user_id }) {
                       marginBottom: '10px',
                     }}
                   >
-                    <Rate defaultValue={item.rating} disabled />
+                    <Rate
+                      key={item.rating}
+                      defaultValue={item.rating}
+                      disabled
+                    />
                   </div>
                   <div
                     style={{

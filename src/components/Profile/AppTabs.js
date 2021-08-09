@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import Projects from './Projects';
+import Skills2 from './Skills2';
 import Skills from './Skills';
 import Reviews from './Reviews';
 

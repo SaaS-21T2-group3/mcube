@@ -28,6 +28,7 @@ import ViewWrapper from './utils/ViewWrapper.js';
 import AppTexts from 'components/utils/AppTexts.js';
 import { useHistory } from 'react-router-dom';
 import avatarImg from 'assets/avatar.jpg';
+import SkillsList from './utils/skillsList.js';
 function Profile({ user_id }) {
   const { Paragraph } = Typography;
   const dispatch = useDispatch();
@@ -134,7 +135,7 @@ function Profile({ user_id }) {
           />
         </div>
 
-        <Col lg={15} md={15} sm={24} xs={24}>
+        <Col lg={12} md={12} sm={24} xs={24}>
           <div>
             <AppTitles
               containerStyles={{ marginLeft: '0px' }}
@@ -152,8 +153,11 @@ function Profile({ user_id }) {
             {/* <div className='italics' style={{ marginLeft: '1%' }}>
               Interests: {interestsList}
             </div> */}
-            <div className='italics' style={{ marginLeft: '2px' }}>
-              skills: {skillsList}
+            <div
+              className='italics'
+              style={{ marginLeft: '2px', marginBottom: '20px' }}
+            >
+              skills: <SkillsList userId={user_id ? user_id : userId} />
             </div>
 
             {avgUserRating != null && (
@@ -162,8 +166,8 @@ function Profile({ user_id }) {
           </div>
         </Col>
         <Col
-          lg={6}
-          md={24}
+          lg={8}
+          md={12}
           sm={24}
           xs={24}
           style={{

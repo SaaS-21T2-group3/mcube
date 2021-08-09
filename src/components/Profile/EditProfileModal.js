@@ -73,12 +73,7 @@ function EditProfileModal({ isModalVisible, userId, handleCancel }) {
             },
           },
         });
-        dispatch({
-          type: actions.GETUSERDETAILS,
-          payload: {
-            user_id: userId,
-          },
-        });
+
         handleCancel();
       },
     });
