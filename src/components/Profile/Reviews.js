@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Row, Col, List, Avatar, Button, Rate, Input, PageHeader } from 'antd';
+import {
+  Row,
+  Col,
+  List,
+  Avatar,
+  Button,
+  Rate,
+  Input,
+  PageHeader,
+  Empty,
+} from 'antd';
 import actions from 'redux/Profile/actions';
 import {
   UserOutlined,
@@ -133,69 +143,61 @@ function Reviews({ user_id }) {
           </List>
         </ViewWrapper>
       )}
-      <List
-        className='demo-loadmore-list'
-        style={{ minHeight: '350px' }}
-        itemLayout='horizontal'
-        dataSource={data || []}
-        renderItem={(item) => (
-          <div className='list-card'>
-            <Row className='feedback-itam'>
-              <Col span={22}>
-                <List.Item.Meta
-                  avatar={
-                    <Avatar
-                      style={{
-                        backgroundColor: getRandomColor(item.first_name),
-                      }}
-                      size={50}
-                      icon={<UserOutlined />}
-                    />
-                  }
-                  title={`${item.first_name} ${item.last_name}`}
-                  description={item.user_title}
-                />
-                <div
-                  style={{
-                    paddingLeft: '65px',
-                    marginTop: '2px',
-                    marginBottom: '10px',
-                  }}
-                >
-                  <Rate defaultValue={item.rating} disabled />
-                </div>
-                <div
-                  style={{
-                    paddingLeft: '65px',
-                    marginTop: '2px',
-                    marginBottom: '10px',
-                  }}
-                >
-                  {item.review_text}
-                </div>
-              </Col>
-              {/* <Col span={2}>
-                {
-                  <Button
-                    type='primary'
-                    shape='circle'
-                    icon={<EditOutlined />}
-                    size={20}
-                    style={{ margin: '2px' }}
+      {data && data?.length !== 0 ? (
+        <List
+          className='demo-loadmore-list'
+          style={{ minHeight: '350px' }}
+          itemLayout='horizontal'
+          dataSource={data || []}
+          renderItem={(item) => (
+            <div className='list-card'>
+              <Row className='feedback-itam'>
+                <Col span={22}>
+                  <List.Item.Meta
+                    avatar={
+                      <Avatar
+                        style={{
+                          backgroundColor: getRandomColor(item.first_name),
+                        }}
+                        size={50}
+                        icon={<UserOutlined />}
+                      />
+                    }
+                    title={`${item.first_name} ${item.last_name}`}
+                    description={item.user_title}
                   />
-                }
-                <Button
-                  type='primary'
-                  shape='circle'
-                  icon={<DeleteOutlined />}
-                  size={20}
-                  style={{ margin: '2px' }}
-                />
-              </Col> */}
-            </Row>
-          </div>
-        )}
-      />
+                  <div
+                    style={{
+                      paddingLeft: '65px',
+                      marginTop: '2px',
+                      marginBottom: '10px',
+                    }}
+                  >
+                    <Rate defaultValue={item.rating} disabled />
+                  </div>
+                  <div
+                    style={{
+                      paddingLeft: '65px',
+                      marginTop: '2px',
+                      marginBottom: '10px',
+                    }}
+                  >
+                    {item.review_text}
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          )}
+        />
+      ) : (
+        <Empty
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          imageStyle={{
+            height: 60,
+          }}
+          description={<span>No reviews yet</span>}
+        ></Empty>
+      )}
     </>
   );
 }

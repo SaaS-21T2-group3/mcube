@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import actions from 'redux/Profile/actions';
-import { Row, Col, Tag, Button, Typography, Avatar, Rate } from 'antd';
+import {
+  Row,
+  Col,
+  Tag,
+  Button,
+  Typography,
+  Avatar,
+  Rate,
+  notification,
+} from 'antd';
 import AppTitles from 'components/utils/AppTitles';
 import AppTabs from './AppTabs.js';
 import {
@@ -23,8 +32,6 @@ function Profile({ user_id }) {
   const { Paragraph } = Typography;
   const dispatch = useDispatch();
   let history = useHistory();
-
-  // const [userId, setUserId] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [data, setData] = useState(null);
   const [avgUserRating, setAvgUserRating] = useState(null);
@@ -68,24 +75,9 @@ function Profile({ user_id }) {
     });
     setAvgUserRating(rating);
   }, []);
-
-  // var interestsList = data?.interest?.topic
-  //   .substring(1, data?.interest?.topic.length - 1)
-  //   .split(',')
-  //   .map(function (interest) {
-  //     return (
-  //       <Tag color={getRandomColor(interest)}>
-  //         {interest.substring(1, interest.length - 1)}
-  //       </Tag>
-  //     );
-  //   });
   let skillsList = data?.skill?.map((skil) => (
     <Tag color={getRandomColor(skil.skill_name)}>{skil.skill_name}</Tag>
   ));
-
-  // const handleClick = () => {
-  //   openEditUsertModel('userId');
-  // };
 
   const openEditUsertModel = () => {
     // setUserId(UserId);
@@ -121,7 +113,7 @@ function Profile({ user_id }) {
           handleCancel={handleCancel}
         />
       )}
-      <Row className='profile-wrapper-header'>
+      <Row className='profile-wrapper-header' style={{ position: 'relative' }}>
         <div className='profile-wrapper-header-div'>
           <Avatar
             src={avatarImg}
@@ -145,6 +137,7 @@ function Profile({ user_id }) {
         <Col lg={15} md={15} sm={24} xs={24}>
           <div>
             <AppTitles
+              containerStyles={{ marginLeft: '0px' }}
               className='large'
               content={`${data?.profile?.first_name}
                 ${data?.profile?.last_name}`}
@@ -159,7 +152,7 @@ function Profile({ user_id }) {
             {/* <div className='italics' style={{ marginLeft: '1%' }}>
               Interests: {interestsList}
             </div> */}
-            <div className='italics' style={{ marginLeft: '1%' }}>
+            <div className='italics' style={{ marginLeft: '2px' }}>
               skills: {skillsList}
             </div>
 
@@ -170,7 +163,7 @@ function Profile({ user_id }) {
         </Col>
         <Col
           lg={6}
-          md={12}
+          md={24}
           sm={24}
           xs={24}
           style={{
@@ -181,17 +174,24 @@ function Profile({ user_id }) {
           }}
         >
           <Row justify='start' align='start'>
-            <AppTitles
-              content={<HomeTwoTone style={{ fontSize: '25px' }} size='30px' />}
-              style={{ fontWeight: 'bold' }}
-            />
+            {data?.profile?.city ||
+            data?.profile?.state ||
+            data?.profile?.country ||
+            data?.profile?.zipcode !== 0 ? (
+              <AppTitles
+                content={
+                  <HomeTwoTone style={{ fontSize: '25px' }} size='30px' />
+                }
+                style={{ fontWeight: 'bold' }}
+              />
+            ) : null}
             <AppTitles
               size='small'
               content={`
-              ${data?.profile?.city} ,
-              ${data?.profile?.state},
-              ${data?.profile?.country},
-              ${data?.profile?.zipcode}`}
+              ${data?.profile?.city}
+              ${data?.profile?.state}
+              ${data?.profile?.country}
+              ${data?.profile?.zipcode === 0 ? '' : data?.profile?.zipcode}`}
             />
           </Row>
 
@@ -224,6 +224,12 @@ function Profile({ user_id }) {
               type='dashed'
               shape='round'
               size={20}
+              onClick={() =>
+                notification['info']({
+                  message: 'Contact number copied',
+                  placement: 'bottomRight',
+                })
+              }
               style={{ margin: '4px' }}
             >
               <Paragraph
@@ -238,18 +244,18 @@ function Profile({ user_id }) {
               ></Paragraph>
             </Button>
           </div>
-          {user_id === undefined && (
-            <Button
-              type='primary'
-              shape='round'
-              icon={<EditOutlined />}
-              onClick={() => openEditUsertModel()}
-              style={{ position: 'absolute', top: '0px', right: '0px' }}
-            >
-              Edit
-            </Button>
-          )}
         </Col>
+        {user_id === undefined && (
+          <Button
+            type='primary'
+            shape='round'
+            icon={<EditOutlined />}
+            onClick={() => openEditUsertModel()}
+            style={{ position: 'absolute', top: '10px', right: '10px' }}
+          >
+            Edit
+          </Button>
+        )}
       </Row>
       <AppTabs user_id={user_id} />
     </ViewWrapper>

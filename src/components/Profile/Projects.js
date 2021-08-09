@@ -108,16 +108,6 @@ function Projects({ user_id }) {
           pageStart={1}
           loadMore={() => fetchMoreProjects()}
           threshold={1}
-          loader={
-            <div className='feed-loader-wrapper'>
-              {/* <Buttons
-              type='primary'
-              // loading={projectsLoading}
-              handleClick={() => fetchMoreProjects()}
-              content={'Load More'}
-            ></Buttons> */}
-            </div>
-          }
         >
           <Row gutter={[16, 16]}>
             {data?.map((i, index) => (
@@ -131,11 +121,11 @@ function Projects({ user_id }) {
         </InfiniteScroll>
       ) : (
         <Empty
-          image='https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg'
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
           imageStyle={{
             height: 60,
           }}
-          description={<span>No Projects...</span>}
+          description={<span>No Projects yet</span>}
         ></Empty>
       )}
     </>

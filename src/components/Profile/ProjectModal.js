@@ -31,7 +31,10 @@ function ProjectModal({
   function handleFollowUnfollow() {
     setFollowLoading(true);
     const id = projectId.split('_')[1];
-    if (collaborators && collaborators.includes(U_id)) {
+    if (
+      collaborators &&
+      collaborators?.map((collaborator) => collaborator.user_id)?.includes(U_id)
+    ) {
       deleteRequest(`project/user_id/${id}/${userId}`)
         .then((res) => {
           getCollaborators(id);
@@ -88,7 +91,12 @@ function ProjectModal({
               loading={followLoading}
               onClick={handleFollowUnfollow}
             >
-              {collaborators && collaborators.includes(U_id)
+              {console.log(collaborators)}
+              {U_id === data?.created_by
+                ? null
+                : collaborators
+                    ?.map((collaborator) => collaborator.user_id)
+                    ?.includes(U_id)
                 ? 'Unfollow'
                 : 'Follow'}
             </Button>,
