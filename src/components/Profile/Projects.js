@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Row, PageHeader, Button } from 'antd';
+import { Row, PageHeader, Button, Empty } from 'antd';
 import ProjectCard from './ProjectCard';
 import InfiniteScroll from 'react-infinite-scroller';
 import ProjectModal from './ProjectModal';
@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import actions from 'redux/Profile/actions';
 import AddProjectModal from './AddProjectModal';
 import { PlusOutlined } from '@ant-design/icons';
+import Buttons from 'components/utils/Buttons';
 
 function Projects({ user_id }) {
   const dispatch = useDispatch();
@@ -93,39 +94,50 @@ function Projects({ user_id }) {
             type='primary'
             shape='round'
             icon={<PlusOutlined />}
+            disabled={user_id !== undefined ? true : false}
             onClick={() => openAddProjectModel()}
           >
             Add project
           </Button>,
         ]}
       ></PageHeader>
-      <InfiniteScroll
-        hasMore={hasMoreContents}
-        initialLoad={false}
-        pageStart={1}
-        loadMore={() => fetchMoreProjects()}
-        threshold={1}
-        loader={
-          <div className='feed-loader-wrapper'>
-            {/* <Buttons
+      {data?.length > 0 ? (
+        <InfiniteScroll
+          hasMore={hasMoreContents}
+          initialLoad={false}
+          pageStart={1}
+          loadMore={() => fetchMoreProjects()}
+          threshold={1}
+          loader={
+            <div className='feed-loader-wrapper'>
+              {/* <Buttons
               type='primary'
               // loading={projectsLoading}
               handleClick={() => fetchMoreProjects()}
               content={'Load More'}
             ></Buttons> */}
-          </div>
-        }
-      >
-        <Row gutter={[16, 16]}>
-          {data?.map((i, index) => (
-            <ProjectCard
-              key={index}
-              project_data={i}
-              openProjectModel={openProjectModel}
-            />
-          ))}
-        </Row>
-      </InfiniteScroll>
+            </div>
+          }
+        >
+          <Row gutter={[16, 16]}>
+            {data?.map((i, index) => (
+              <ProjectCard
+                key={index}
+                project_data={i}
+                openProjectModel={openProjectModel}
+              />
+            ))}
+          </Row>
+        </InfiniteScroll>
+      ) : (
+        <Empty
+          image='https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg'
+          imageStyle={{
+            height: 60,
+          }}
+          description={<span>No Projects...</span>}
+        ></Empty>
+      )}
     </>
   );
 }

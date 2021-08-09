@@ -47,7 +47,7 @@ function Reviews({ user_id }) {
       setData(userReviewsList);
     }
     return () => {};
-  }, [userReviewsList, userReviewsListTemp]);
+  }, [userReviewsList, userReviewsListTemp, user_id]);
   const toggleNewReview = () => {
     setNewReviewToggle(!newReviewToggle);
   };
@@ -61,9 +61,6 @@ function Reviews({ user_id }) {
   };
 
   const submitReview = () => {
-    console.log(userId);
-    console.log(user_id);
-    console.log(addReview);
     dispatch({
       type: actions.ADDUSERREVIEW,
       payload: {
