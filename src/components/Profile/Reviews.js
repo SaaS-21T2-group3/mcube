@@ -93,18 +93,22 @@ function Reviews({ user_id }) {
     <>
       <PageHeader
         title='Reviews'
-        extra={[
-          <Button
-            type='primary'
-            shape='round'
-            icon={<PlusOutlined />}
-            content='New Review'
-            onClick={toggleNewReview}
-            disabled={user_id === undefined ? true : false}
-          >
-            Add/Update
-          </Button>,
-        ]}
+        extra={
+          user_id !== undefined
+            ? [
+                <Button
+                  type='primary'
+                  shape='round'
+                  icon={<PlusOutlined />}
+                  content='New Review'
+                  onClick={toggleNewReview}
+                  disabled={user_id === undefined ? true : false}
+                >
+                  Add/Update
+                </Button>,
+              ]
+            : []
+        }
       ></PageHeader>
       {newReviewToggle && (
         <ViewWrapper>

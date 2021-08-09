@@ -89,17 +89,21 @@ function Projects({ user_id }) {
       />
       <PageHeader
         title='Projects'
-        extra={[
-          <Button
-            type='primary'
-            shape='round'
-            icon={<PlusOutlined />}
-            disabled={user_id !== undefined ? true : false}
-            onClick={() => openAddProjectModel()}
-          >
-            Add project
-          </Button>,
-        ]}
+        extra={
+          user_id === undefined
+            ? [
+                <Button
+                  type='primary'
+                  shape='round'
+                  icon={<PlusOutlined />}
+                  disabled={user_id !== undefined ? true : false}
+                  onClick={() => openAddProjectModel()}
+                >
+                  Add project
+                </Button>,
+              ]
+            : []
+        }
       ></PageHeader>
       {data?.length > 0 ? (
         <InfiniteScroll
