@@ -11,7 +11,7 @@ const { Option } = Select;
 const { Search } = Input;
 
 function Skills({ user_id }) {
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState(null);
   const [tagsList, setTagsList] = useState(null);
   const [skillListComponent, setSkillListComponent] = useState(null);
   const [addSkill, setAddSkill] = useState('');
@@ -86,7 +86,6 @@ function Skills({ user_id }) {
   }
 
   const updateUserSkillList = () => {
-    console.log('update to ', tags);
     let resultTags = {};
     for (let i = 0; i < tags.length; i++) {
       resultTags[i] = tags[i];
@@ -114,7 +113,7 @@ function Skills({ user_id }) {
       >
         <Row gutter={16} className=''>
           <Col span={18}>
-            {skillList?.length > 0 && (
+            {userSkillList && (
               <Select
                 mode='multiple'
                 style={{ width: '80%' }}
@@ -146,7 +145,6 @@ function Skills({ user_id }) {
           </Col>
         </Row>
       </PageHeader>
-
       <SectionDivider />
       <div className='list-card'>{tagsList}</div>
     </>

@@ -3,6 +3,7 @@ import actions from 'redux/Profile/actions';
 const initialState = {
   profileData: null,
   profileDataTemp: {},
+  rating: 0,
   userId: null,
   skillList: [],
   userProjectList: [],
@@ -28,6 +29,9 @@ function Reducer(state = initialState, action) {
       };
     case actions.EDITUSERDETAILS_SUCCESS:
       return { ...state };
+    //AMEL
+    case actions.GETAVGUSERRATING_SUCCESS:
+      return { ...state, rating: action.data.avg_rating };
     //PROJECTS
     case actions.GETUSERPROJECTS_SUCCESS:
       return { ...state, userProjectList: action.data.data };
@@ -41,6 +45,8 @@ function Reducer(state = initialState, action) {
         },
       };
     case actions.CREATEUSERPROJECT_SUCCESS:
+      return { ...state };
+    case actions.DELETEORUNFOLLOWPROJECT_SUCCESS:
       return { ...state };
     //SKILLS
     case actions.GETSKILLS_SUCCESS:
@@ -74,6 +80,8 @@ function Reducer(state = initialState, action) {
           ...newReviewsTemp,
         },
       };
+    case actions.ADDUSERREVIEW_SUCCESS:
+      return { ...state };
     default:
       return state;
   }

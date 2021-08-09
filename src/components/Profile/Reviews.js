@@ -1,21 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  Row,
-  Col,
-  List,
-  Avatar,
-  Button,
-  Rate,
-  Collapse,
-  Form,
-  Input,
-  PageHeader,
-} from 'antd';
+import { Row, Col, List, Avatar, Button, Rate, Input, PageHeader } from 'antd';
 import actions from 'redux/Profile/actions';
 import {
   UserOutlined,
-  EditOutlined,
   PlusOutlined,
   CloseCircleOutlined,
   SendOutlined,
@@ -25,7 +13,6 @@ import ViewWrapper from 'components/Forum/contentPage/utils/ViewWrapper';
 import { getRandomColor } from '../tools/colorGenerator';
 
 function Reviews({ user_id }) {
-  const { Panel } = Collapse;
   const { TextArea } = Input;
   const dispatch = useDispatch();
   const [data, setData] = useState(null);
@@ -35,6 +22,9 @@ function Reviews({ user_id }) {
   );
   const { userId } = useSelector((state) => state.authenticateReducer);
   const [newReviewToggle, setNewReviewToggle] = useState(false);
+  const [rateUser, setRateUser] = useState(0);
+  const [addReview, setAddReview] = useState('');
+
   useEffect(() => {
     user_id
       ? dispatch({
@@ -61,12 +51,41 @@ function Reviews({ user_id }) {
   const toggleNewReview = () => {
     setNewReviewToggle(!newReviewToggle);
   };
-  console.log(userReviewsList, userReviewsListTemp);
+
+  function addReviewFunc(value) {
+    setAddReview(value);
+  }
+
+  const rateUserFunc = (value) => {
+    setRateUser(value);
+  };
+
+  const submitReview = () => {
+    console.log(userId);
+    console.log(user_id);
+    console.log(addReview);
+    dispatch({
+      type: actions.ADDUSERREVIEW,
+      payload: {
+        fromuserID: Number(userId),
+        rating: rateUser,
+        review: addReview,
+        toUserID: Number(user_id),
+      },
+    });
+    dispatch({
+      type: actions.GETTEMPUSERREVIEWS,
+      payload: {
+        user_id: Number(user_id),
+      },
+    });
+    setData(userReviewsListTemp[user_id]);
+  };
+
   return (
     <>
       <PageHeader
         title='Reviews'
-        subTitle='User Reviews'
         extra={[
           <Button
             type='primary'
@@ -74,8 +93,9 @@ function Reviews({ user_id }) {
             icon={<PlusOutlined />}
             content='New Review'
             onClick={toggleNewReview}
+            disabled={user_id === undefined ? true : false}
           >
-            Add Review
+            Add/Update
           </Button>,
         ]}
       ></PageHeader>
@@ -84,7 +104,14 @@ function Reviews({ user_id }) {
           <List className='feed-list-wrapper'>
             <List.Item>Add a Review</List.Item>
             <List.Item>
-              <TextArea placeholder='Add review here!' rows={4} />
+              <TextArea
+                placeholder='Add review here!'
+                onChange={(e) => addReviewFunc(e.target.value)}
+                rows={4}
+              />
+            </List.Item>
+            <List.Item>
+              <Rate defaultValue={0} onChange={rateUserFunc} />
             </List.Item>
             <List.Item
               key='new review'
@@ -102,7 +129,7 @@ function Reviews({ user_id }) {
                   shape='round'
                   icon={<SendOutlined />}
                   content='Add Review'
-                  //handleClick={() => submitReview()}
+                  handleClick={submitReview}
                 />,
               ]}
             ></List.Item>
@@ -138,10 +165,19 @@ function Reviews({ user_id }) {
                     marginBottom: '10px',
                   }}
                 >
+                  <Rate defaultValue={item.rating} disabled />
+                </div>
+                <div
+                  style={{
+                    paddingLeft: '65px',
+                    marginTop: '2px',
+                    marginBottom: '10px',
+                  }}
+                >
                   {item.review_text}
                 </div>
               </Col>
-              <Col span={2}>
+              {/* <Col span={2}>
                 {
                   <Button
                     type='primary'
@@ -151,14 +187,14 @@ function Reviews({ user_id }) {
                     style={{ margin: '2px' }}
                   />
                 }
-                {/* <Button
+                <Button
                   type='primary'
                   shape='circle'
                   icon={<DeleteOutlined />}
                   size={20}
                   style={{ margin: '2px' }}
-                /> */}
-              </Col>
+                />
+              </Col> */}
             </Row>
           </div>
         )}

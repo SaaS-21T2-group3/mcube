@@ -38,6 +38,7 @@ function Projects({ user_id }) {
           },
         });
   }, []);
+
   useEffect(() => {
     if (user_id) {
       setData(userProjectListTemp[user_id]);
@@ -45,10 +46,9 @@ function Projects({ user_id }) {
       setData(userProjectList);
     }
     return () => {};
-  }, [userProjectListTemp, userProjectList]);
+  }, [userProjectListTemp, userProjectList, user_id]);
 
   const openProjectModel = (projectId) => {
-    console.log(projectId);
     setProjectId(projectId);
     setIsProjectModalVisible(true);
   };
@@ -74,7 +74,7 @@ function Projects({ user_id }) {
       setHasMoreContents(false);
     }
   };
-  console.log(userProjectListTemp);
+
   return (
     <>
       <ProjectModal
@@ -88,7 +88,6 @@ function Projects({ user_id }) {
       />
       <PageHeader
         title='Projects'
-        subTitle='User Projects'
         extra={[
           <Button
             type='primary'

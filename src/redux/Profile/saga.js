@@ -1,10 +1,14 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import actions from 'redux/Profile/actions';
-import { postRequest, getRequest, putRequest } from 'Config/axiosClient';
+import {
+  postRequest,
+  getRequest,
+  putRequest,
+  deleteRequest,
+} from 'Config/axiosClient';
 import { notification } from 'antd';
 
 function* getUserDetails(action) {
-  console.log('getting userdetails');
   try {
     const response = yield call(() =>
       getRequest(`user/${action.payload.user_id}`),
@@ -16,6 +20,7 @@ function* getUserDetails(action) {
     yield put({ type: actions.GETUSERDETAILS_FAILURE, e });
   }
 }
+
 function* getTempUserDetails(action) {
   try {
     const response = yield call(() =>
@@ -30,6 +35,22 @@ function* getTempUserDetails(action) {
     } else throw response.statusText;
   } catch (e) {
     yield put({ type: actions.GETTEMPUSERDETAILS_FAILURE, e });
+  }
+}
+
+function* getAvgUserRating(action) {
+  try {
+    const response = yield call(() =>
+      getRequest(`user/avg_ratings/${action.payload.user_id}`),
+    );
+    if (response.status === 200)
+      yield put({
+        type: actions.GETAVGUSERRATING_SUCCESS,
+        data: response.data,
+      });
+    else throw response.statusText;
+  } catch (e) {
+    yield put({ type: actions.GETAVGUSERRATING_FAILURE, e });
   }
 }
 
@@ -66,6 +87,7 @@ function* getUserProjects(action) {
     yield put({ type: actions.GETUSERPROJECTS_FAILURE, e });
   }
 }
+
 function* getTempUserProjects(action) {
   try {
     const response = yield call(() =>
@@ -82,6 +104,7 @@ function* getTempUserProjects(action) {
     yield put({ type: actions.GETTEMPUSERPROJECTS_FAILURE, e });
   }
 }
+
 function* addUserProject(action) {
   try {
     const response = yield call(() =>
@@ -103,6 +126,29 @@ function* addUserProject(action) {
     } else throw response.statusText;
   } catch (e) {
     yield put({ type: actions.CREATEUSERPROJECT_FAILURE, e });
+  }
+}
+
+function* deleteOrUnfollowProject(action) {
+  try {
+    const response = yield call(() =>
+      deleteRequest(
+        `project/user_id/${action.payload.project_id}/${action.payload.user_id}`,
+      ),
+    );
+    if (response.status === 200) {
+      notification['success']({
+        message: 'Removed project successfully',
+        description: response?.data?.message,
+        placement: 'bottomRight',
+      });
+      yield put({
+        type: actions.DELETEORUNFOLLOWPROJECT_SUCCESS,
+        data: response.data,
+      });
+    } else throw response.statusText;
+  } catch (e) {
+    yield put({ type: actions.DELETEORUNFOLLOWPROJECT_FAILURE, e });
   }
 }
 
@@ -208,19 +254,40 @@ function* getTempUserReviews(action) {
   }
 }
 
+function* addUserReview(action) {
+  try {
+    const response = yield call(() =>
+      postRequest(`user/review`, action.payload),
+    );
+    if (response.status === 200 && response.data.success === true) {
+      notification['success']({
+        message: 'Added new review',
+        description: response?.data?.message,
+        placement: 'bottomRight',
+      });
+      yield put({ type: actions.ADDUSERREVIEW_SUCCESS, data: response.data });
+    } else throw response.statusText;
+  } catch (e) {
+    yield put({ type: actions.ADDUSERREVIEW_FAILURE, e });
+  }
+}
+
 export default function* rootSaga() {
   yield all([
     takeLatest(actions.GETUSERDETAILS, getUserDetails),
     takeLatest(actions.GETTEMPUSERDETAILS, getTempUserDetails),
+    takeLatest(actions.GETAVGUSERRATING, getAvgUserRating),
     takeLatest(actions.EDITUSERDETAILS, editUserDetails),
     takeLatest(actions.GETUSERPROJECTS, getUserProjects),
     takeLatest(actions.GETTEMPUSERPROJECTS, getTempUserProjects),
     takeLatest(actions.CREATEUSERPROJECT, addUserProject),
+    takeLatest(actions.DELETEORUNFOLLOWPROJECT, deleteOrUnfollowProject),
     takeLatest(actions.GETSKILLS, getSkills),
     takeLatest(actions.ADDSKILL, addSkill),
     takeLatest(actions.GETUSERSKILLS, getUserSkills),
     takeLatest(actions.UPDATEUSERSKILLS, updateUserSkills),
     takeLatest(actions.GETUSERREVIEWS, getUserReviews),
     takeLatest(actions.GETTEMPUSERREVIEWS, getTempUserReviews),
+    takeLatest(actions.ADDUSERREVIEW, addUserReview),
   ]);
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import actions from 'redux/Profile/actions';
-import { Row, Col, Tag, Button, Typography, Avatar } from 'antd';
+import { Row, Col, Tag, Button, Typography, Avatar, Rate } from 'antd';
 import AppTitles from 'components/utils/AppTitles';
 import AppTabs from './AppTabs.js';
 import {
@@ -27,12 +27,13 @@ function Profile({ user_id }) {
   // const [userId, setUserId] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [data, setData] = useState(null);
+  const [avgUserRating, setAvgUserRating] = useState(null);
   const { userId } = useSelector((state) => state.authenticateReducer);
 
-  const { profileData, profileDataTemp } = useSelector(
+  const { profileData, profileDataTemp, rating } = useSelector(
     (state) => state.profileReducer,
   );
-  console.log(user_id);
+
   useEffect(() => {
     user_id
       ? dispatch({
@@ -58,16 +59,26 @@ function Profile({ user_id }) {
     return () => {};
   }, [profileDataTemp, profileData]);
 
-  var interestsList = data?.interest?.topic
-    .substring(1, data?.interest?.topic.length - 1)
-    .split(',')
-    .map(function (interest) {
-      return (
-        <Tag color={getRandomColor(interest)}>
-          {interest.substring(1, interest.length - 1)}
-        </Tag>
-      );
+  useEffect(() => {
+    dispatch({
+      type: actions.GETAVGUSERRATING,
+      payload: {
+        user_id: user_id ? user_id : userId,
+      },
     });
+    setAvgUserRating(rating);
+  }, []);
+
+  // var interestsList = data?.interest?.topic
+  //   .substring(1, data?.interest?.topic.length - 1)
+  //   .split(',')
+  //   .map(function (interest) {
+  //     return (
+  //       <Tag color={getRandomColor(interest)}>
+  //         {interest.substring(1, interest.length - 1)}
+  //       </Tag>
+  //     );
+  //   });
   let skillsList = data?.skill?.map((skil) => (
     <Tag color={getRandomColor(skil.skill_name)}>{skil.skill_name}</Tag>
   ));
@@ -96,7 +107,7 @@ function Profile({ user_id }) {
   const openMailInNewTab = (url) => {
     window.open(`mailto: ${url}`, '_blank');
   };
-  console.log(data, profileDataTemp);
+
   return data ? (
     <ViewWrapper grid={true}>
       {user_id === undefined && (
@@ -141,13 +152,15 @@ function Profile({ user_id }) {
               className='medium italics'
               content={`Title: ${data?.profile?.title}`}
             />
-            <div className='italics' style={{ marginLeft: '1%' }}>
+            {/* <div className='italics' style={{ marginLeft: '1%' }}>
               Interests: {interestsList}
+            </div> */}
+            <div className='italics' style={{ marginLeft: '1%' }}>
+              skills: {skillsList}
             </div>
-            {user_id && (
-              <div className='italics' style={{ marginLeft: '1%' }}>
-                skills: {skillsList}
-              </div>
+
+            {avgUserRating != null && (
+              <Rate defaultValue={avgUserRating} disabled />
             )}
           </div>
         </Col>
@@ -221,15 +234,17 @@ function Profile({ user_id }) {
               ></Paragraph>
             </Button>
           </div>
-          <Button
-            type='primary'
-            shape='round'
-            icon={<EditOutlined />}
-            onClick={() => openEditUsertModel()}
-            style={{ position: 'absolute', top: '0px', right: '0px' }}
-          >
-            Edit
-          </Button>
+          {user_id === undefined && (
+            <Button
+              type='primary'
+              shape='round'
+              icon={<EditOutlined />}
+              onClick={() => openEditUsertModel()}
+              style={{ position: 'absolute', top: '0px', right: '0px' }}
+            >
+              Edit
+            </Button>
+          )}
         </Col>
       </Row>
       <AppTabs user_id={user_id} />
