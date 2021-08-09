@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Select, Tag, Button, PageHeader } from 'antd';
+import { Row, Col, Select, Tag, Button, PageHeader, Space } from 'antd';
 import SectionDivider from '../utils/SectionDivider';
 import { Input, Tooltip } from 'antd';
 import { InfoCircleOutlined, TagsOutlined } from '@ant-design/icons';
@@ -18,7 +18,9 @@ function Skills({ user_id }) {
   const dispatch = useDispatch();
 
   const { userId } = useSelector((state) => state.authenticateReducer);
-
+  const { skillList, userSkillList } = useSelector(
+    (state) => state.profileReducer,
+  );
   useEffect(() => {
     dispatch({
       type: actions.GETSKILLS,
@@ -31,13 +33,9 @@ function Skills({ user_id }) {
     });
   }, []);
 
-  const { skillList, userSkillList } = useSelector(
-    (state) => state.profileReducer,
-  );
-
   useEffect(() => {
     let SkillListComponent1 = null;
-    SkillListComponent1 = skillList.map(function (skill) {
+    SkillListComponent1 = skillList?.map(function (skill) {
       return (
         <Option value={skill}>
           <div className='demo-option-label-item'>{skill}</div>
@@ -48,8 +46,9 @@ function Skills({ user_id }) {
   }, [skillList]);
 
   useEffect(() => {
+    setTags(userSkillList);
     let tagsList1 = null;
-    tagsList1 = userSkillList.map(function (tag, index) {
+    tagsList1 = userSkillList?.map(function (tag, index) {
       return (
         <Tag key={index} color={getRandomColor(tag)}>
           {tag}
@@ -57,20 +56,22 @@ function Skills({ user_id }) {
       );
     });
     setTagsList(tagsList1);
-  }, []);
-
+  }, [userSkillList]);
+  useEffect(() => {
+    let tagsList1 = null;
+    tagsList1 = tags?.map(function (tag, index) {
+      return (
+        <Tag key={index} color={getRandomColor(tag)}>
+          {tag}
+        </Tag>
+      );
+    });
+    setTagsList(tagsList1);
+    return () => {};
+  }, [tags]);
   function handleChange(value) {
-    //console.log(`selected ${value}`);
+    console.log(`selected ${value}`);
     setTags(value);
-    let tagsList1 = null;
-    tagsList1 = tags.map(function (tag, index) {
-      return (
-        <Tag key={index} color={getRandomColor(tag)}>
-          {tag}
-        </Tag>
-      );
-    });
-    setTagsList(tagsList1);
   }
 
   function addNewSkillFunc() {
@@ -88,8 +89,9 @@ function Skills({ user_id }) {
   const updateUserSkillList = () => {
     let resultTags = {};
     for (let i = 0; i < tags.length; i++) {
-      resultTags[i] = tags[i];
+      resultTags[String(i)] = tags[i];
     }
+    console.log(resultTags);
     dispatch({
       type: actions.UPDATEUSERSKILLS,
       payload: {
@@ -98,7 +100,7 @@ function Skills({ user_id }) {
       },
     });
     dispatch({
-      type: actions.GETUSERSKILLS,
+      type: actions.GETUSERDETAILS,
       payload: {
         user_id: userId,
       },
@@ -112,23 +114,7 @@ function Skills({ user_id }) {
         // extra={<ForumPageHeaderExtras page='Feeds' />}
       >
         <Row gutter={16} className=''>
-          <Col span={18}>
-            {userSkillList && (
-              <Select
-                mode='multiple'
-                style={{ width: '80%' }}
-                placeholder='select skills'
-                defaultValue={userSkillList}
-                onChange={handleChange}
-              >
-                {skillListComponent}
-              </Select>
-            )}
-            <Button type='primary' onClick={updateUserSkillList}>
-              Add Skills
-            </Button>
-          </Col>
-          <Col span={6}>
+          <Col span={24} className='skills-tags-container'>
             <Search
               placeholder='Add new tag'
               enterButton='Add Tag'
@@ -143,10 +129,30 @@ function Skills({ user_id }) {
               }
             />
           </Col>
+          <Col span={24} className='skills-tags-container'>
+            {console.log(userSkillList)}
+            {userSkillList?.length !== 0 && (
+              <Select
+                className='skill-select'
+                mode='multiple'
+                style={{ width: '80%' }}
+                placeholder='select skills'
+                defaultValue={userSkillList}
+                onChange={handleChange}
+              >
+                {skillListComponent}
+              </Select>
+            )}
+            <Button type='primary' onClick={updateUserSkillList}>
+              Add Skills
+            </Button>
+          </Col>
         </Row>
       </PageHeader>
       <SectionDivider />
-      <div className='list-card'>{tagsList}</div>
+      {/* <div className='list-card'>
+        <Space>{tagsList}</Space>
+      </div> */}
     </>
   );
 }

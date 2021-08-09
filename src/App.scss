@@ -781,6 +781,18 @@ body {
   .skill-options {
     background-color: whitesmoke;
     margin-bottom: 10px;
+    .ant-row {
+      display: flex;
+      flex-flow: column;
+      min-height: 400px;
+      align-items: stretch;
+      justify-content: center;
+    }
+    .skills-tags-container {
+      margin-bottom: 40px;
+      .skill-select {
+      }
+    }
   }
   .feedback-itam {
     display: flex;

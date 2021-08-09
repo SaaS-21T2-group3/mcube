@@ -68,11 +68,6 @@ function* postMessages(action) {
         fromUser: action.payload.from_user_id,
       });
     } else {
-      notification['error']({
-        message: 'Failed to send Messages',
-        description: response?.data?.message,
-        placement: 'bottomRight',
-      });
       yield put({ type: actions.POSTMESSAGE_FAILURE });
     }
   } catch (e) {

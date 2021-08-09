@@ -98,28 +98,19 @@ function Reducer(state = initialState, action) {
         case 'project':
           return {
             ...state,
-            contentRecommProjects: [
-              ...state.contentRecommProjects,
-              ...action.data,
-            ],
+            contentRecommProjects: [...action.data],
             recommLoading: false,
           };
         case 'mentees':
           return {
             ...state,
-            contentRecommMentees: [
-              ...state.contentRecommMentees,
-              ...action.data,
-            ],
+            contentRecommMentees: [...action.data],
             recommLoading: false,
           };
         case 'mentor':
           return {
             ...state,
-            contentRecommMentors: [
-              ...state.contentRecommMentors,
-              ...action.data,
-            ],
+            contentRecommMentors: [...action.data],
             recommLoading: false,
           };
         default:

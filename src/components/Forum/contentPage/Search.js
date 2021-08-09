@@ -10,6 +10,7 @@ import UserModal from 'components/utils/UserModal';
 import ForumPhSearchExtras from '../HeaderExtras/ForumPhSearchExtras';
 import capitalize from 'components/tools/capitalize';
 import logoimg from 'assets/logo/medium.png';
+import sorter from 'components/tools/sorter';
 
 export default function Search() {
   const dispatch = useDispatch();
@@ -101,7 +102,7 @@ export default function Search() {
           threshold={100}
         >
           <Row className='search-result-container' gutter={[16, 16]}>
-            {data.map((searchResult, index) =>
+            {sorter(data, 'score', true)?.map((searchResult, index) =>
               !searchResult?.project_id ? (
                 <UserCard
                   key={searchResult.title + index}
