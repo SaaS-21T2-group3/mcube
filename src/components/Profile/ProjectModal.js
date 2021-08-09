@@ -123,7 +123,11 @@ function ProjectModal({
             <Col span={12}>
               <Row>
                 <Col span={24}>
-                  <AppTexts containerStyles='nomargin' content='Created By' />
+                  <AppTexts
+                    strong
+                    containerStyles='nomargin'
+                    content='Created By'
+                  />
 
                   <AppTexts
                     content={
