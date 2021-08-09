@@ -26,17 +26,6 @@ export default function SearchSelector({ handleChange }) {
     setFilteredData(searchResult);
   };
 
-  //   <Select
-  //     labelInValue
-  //     placeholder='Select Project'
-  //     filterOption={false}
-  //     onSearch={() => null}
-  //     style={}
-  //     notFoundContent={false ? <Spin size='small' /> : null}
-  //     onChange={(value, key) => handleChange(value.value, key.key)}
-  //     options={data}
-  //   />
-
   return (
     <Select
       showSearch

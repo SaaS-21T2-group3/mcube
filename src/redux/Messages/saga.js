@@ -10,21 +10,11 @@ function* getContacts(action) {
       getRequest(`chat_contactlist/${action.userId}`),
     );
     if (response?.data?.success) {
-      // notification['success']({
-      //   message: 'Welcome back',
-      //   description: response?.data?.message,
-      //   placement: 'bottomRight',
-      // });
       yield put({
         type: actions.GETCONTACTS_SUCCESS,
         contacts: response?.data?.data,
       });
     } else {
-      notification['error']({
-        message: 'Failed to login',
-        description: response?.data?.message,
-        placement: 'bottomRight',
-      });
       yield put({ type: actions.GETCONTACTS_FAILURE });
     }
   } catch (e) {
