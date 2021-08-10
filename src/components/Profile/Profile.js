@@ -160,6 +160,15 @@ function Profile({ user_id }) {
                 fontWeight: 'bold',
               }}
             />
+            {capitalize(data?.profile?.user_type) === 'mentee' ? (
+              <Tag key={data?.profile?.user_type} color='#365b74'>
+                {capitalize(data?.profile?.user_type)}
+              </Tag>
+            ) : (
+              <Tag key={data?.profile?.user_type} color='#2db7f5'>
+                {capitalize(data?.profile?.user_type)}
+              </Tag>
+            )}
             <AppTexts
               className='medium italics'
               content={data?.profile?.title}

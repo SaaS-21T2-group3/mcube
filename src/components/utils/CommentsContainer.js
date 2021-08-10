@@ -90,8 +90,9 @@ export default function CommentsContainer({ postId, defaultComments = [] }) {
           useWindow={false}
         >
           <List
+            key={comments?.length}
             itemLayout='vertical'
-            dataSource={[...comments]}
+            dataSource={comments}
             renderItem={(item) => <Comment key={item.comment_id} item={item} />}
           >
             {loading && hasMore && (

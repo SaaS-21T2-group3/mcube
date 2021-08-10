@@ -12,7 +12,6 @@ export default function Comment({ item }) {
   const [idForModal, setIdForModal] = useState(item.user_id);
 
   const handleMoreDetails = (type, id) => {
-    console.log('Helooooooooooooooooooooooooooooooooooooooooooooooo');
     setIdForModal(id);
     setIsUserModalVisible(true);
   };
@@ -20,48 +19,44 @@ export default function Comment({ item }) {
     setIsUserModalVisible(false);
   };
   return (
-    <>
+    <List.Item key={item.comment_id}>
       <UserModal
         key={isUserModalVisible}
         isModalVisible={isUserModalVisible}
         userID={idForModal}
         handleCancel={handleCancel}
       />
-      <List.Item key={item.comment_id}>
-        <List.Item.Meta
-          avatar={
-            <Avatar
-              icon={<UserOutlined />}
-              style={{
-                backgroundColor: getRandomColor(item.message),
-              }}
-              onClick={() => handleMoreDetails('user_id', item.user_id)}
+      <List.Item.Meta
+        avatar={
+          <Avatar
+            icon={<UserOutlined />}
+            style={{
+              backgroundColor: getRandomColor(item.message),
+            }}
+            onClick={() => handleMoreDetails('user_id', item.user_id)}
+          />
+        }
+        title={
+          <>
+            <AppTexts
+              containerStyles='comment-name-container'
+              className='medium'
+              content={`${item?.first_name} ${item?.last_name}`}
+            ></AppTexts>
+            <AppTexts
+              containerStyles='comment-timestamp-container'
+              className='comment-timestamp xsmall'
+              content={moment(new Date(item.timestamp * 1000))
+                .subtract(0, 'days')
+                .fromNow()}
             />
-          }
-          title={
-            <>
-              <AppTexts
-                containerStyles='comment-name-container'
-                className='medium'
-                content={`${item.first_name || 'firname'} ${
-                  item.last_name || 'last name'
-                }`}
-              ></AppTexts>
-              <AppTexts
-                containerStyles='comment-timestamp-container'
-                className='comment-timestamp xsmall'
-                content={moment(new Date(item.timestamp * 1000))
-                  .subtract(0, 'days')
-                  .fromNow()}
-              />
-            </>
-          }
-          description={<AppTexts content={item.content} />}
-        />
-        <div style={{ marginLeft: '58px' }}>
-          <AppTexts content={item.message} />
-        </div>
-      </List.Item>
-    </>
+          </>
+        }
+        description={<AppTexts content={item.content} />}
+      />
+      <div style={{ marginLeft: '58px' }}>
+        <AppTexts content={item.message} />
+      </div>
+    </List.Item>
   );
 }
