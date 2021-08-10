@@ -21,6 +21,7 @@ import {
   HomeTwoTone,
   PhoneOutlined,
   PhoneFilled,
+  UserOutlined,
 } from '@ant-design/icons';
 import EditProfileModal from './EditProfileModal.js';
 import { getRandomColor } from '../tools/colorGenerator';
@@ -29,6 +30,8 @@ import AppTexts from 'components/utils/AppTexts.js';
 import { useHistory } from 'react-router-dom';
 import avatarImg from 'assets/avatar.jpg';
 import SkillsList from './utils/skillsList.js';
+import capitalize from 'components/tools/capitalize';
+import { truncateName } from 'components/tools/getTruncatedName.js';
 function Profile({ user_id }) {
   const { Paragraph } = Typography;
   const dispatch = useDispatch();
@@ -117,10 +120,16 @@ function Profile({ user_id }) {
       <Row className='profile-wrapper-header' style={{ position: 'relative' }}>
         <div className='profile-wrapper-header-div'>
           <Avatar
-            src={avatarImg}
             style={{
               // backgroundColor: 'rgb(154 160 164)',
-              backgroundColor: getRandomColor('Navya'),
+              fontSize: '24px',
+              backgroundColor: getRandomColor(
+                truncateName(
+                  `${capitalize(data?.profile?.first_name)} ${capitalize(
+                    data?.profile?.last_name,
+                  )}`,
+                ),
+              ),
               margin: 'auto',
             }}
             size={{
@@ -131,8 +140,13 @@ function Profile({ user_id }) {
               xl: 100,
               xxl: 100,
             }}
-            // icon={<UserOutlined />}
-          />
+          >
+            {truncateName(
+              `${capitalize(data?.profile?.first_name)} ${capitalize(
+                data?.profile?.last_name,
+              )}`,
+            )}
+          </Avatar>
         </div>
 
         <Col lg={12} md={12} sm={24} xs={24}>
@@ -140,15 +154,16 @@ function Profile({ user_id }) {
             <AppTitles
               containerStyles={{ marginLeft: '0px' }}
               className='large'
-              content={`${data?.profile?.first_name}
-                ${data?.profile?.last_name}`}
+              content={`${capitalize(data?.profile?.first_name)} ${capitalize(
+                data?.profile?.last_name,
+              )}`}
               style={{
                 fontWeight: 'bold',
               }}
             />
             <AppTexts
               className='medium italics'
-              content={`Title: ${data?.profile?.title}`}
+              content={data?.profile?.title}
             />
             {/* <div className='italics' style={{ marginLeft: '1%' }}>
               Interests: {interestsList}
@@ -157,7 +172,7 @@ function Profile({ user_id }) {
               className='italics'
               style={{ marginLeft: '2px', marginBottom: '20px' }}
             >
-              skills: <SkillsList userId={user_id ? user_id : userId} />
+              <SkillsList userId={user_id ? user_id : userId} />
             </div>
 
             {avgUserRating != null && (
