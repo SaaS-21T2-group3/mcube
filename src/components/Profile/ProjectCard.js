@@ -40,7 +40,7 @@ function ProjectCard({ project_data, openProjectModel }) {
   }
 
   return (
-    <Col lg={12} md={12} sm={24} xs={24}>
+    <Col lg={12} md={24} sm={24} xs={24}>
       <Card
         title={project_data.title}
         className='list-card'

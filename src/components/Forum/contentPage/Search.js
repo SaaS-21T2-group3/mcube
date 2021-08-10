@@ -101,7 +101,7 @@ export default function Search() {
           }
           threshold={100}
         >
-          <Row className='search-result-container' gutter={[16, 16]}>
+          <Row className='search-result-container' gutter={[24, 24]}>
             {sorter(data, 'score', true)?.map((searchResult, index) =>
               !searchResult?.project_id ? (
                 <UserCard
