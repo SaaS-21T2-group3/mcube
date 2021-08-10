@@ -12,6 +12,7 @@ import AppTexts from 'components/utils/AppTexts';
 import { useLocation } from 'react-router-dom';
 import { getRequest } from 'Config/axiosClient';
 import MessageSearchSelect from 'components/utils/MessageSearchSelect';
+import removeDuplicate from 'components/tools/removeDuplicate';
 
 const { Content, Sider } = Layout;
 export default function MessagesPage() {
@@ -45,7 +46,7 @@ export default function MessagesPage() {
     });
     var id = `U_${location?.state?.userId}`;
 
-    if (id) {
+    if (location?.state?.userId) {
       let existingUsers = [...contacts, ...tempContact].map(
         (contact) => contact.user_id,
       );
@@ -122,7 +123,7 @@ export default function MessagesPage() {
     setSelectedAcontact(selectedContact?.user_id);
     // }
   };
-  contactData = [...contacts, ...tempContact];
+  contactData = removeDuplicate([...contacts, ...tempContact], 'user_id');
   return (
     <div className='messages-page-wrapper'>
       <Layout>
