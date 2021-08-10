@@ -188,7 +188,12 @@ export default function Recommendations() {
         imageStyle={{
           height: 60,
         }}
-        description={<span>Waiting for Recommendations...</span>}
+        description={
+          <span>
+            You need minimum of three skill added to your profile yo get the
+            recommendation.
+          </span>
+        }
       >
         <Buttons handleClick={addMoreRecomm} content='Retry loading Recomm' />
       </Empty>

@@ -28,11 +28,6 @@ export default function MessagesPage() {
 
   const location = useLocation();
   useEffect(() => {
-    console.log(location.pathname); // result: '/secondpage'
-    console.log(location.search); // result: '?query=abc'
-    console.log(location?.state?.userId); // result: 'some_value'
-  }, [location]);
-  useEffect(() => {
     setSelectedAcontact(activeContact?.user_id);
     return () => {};
   }, [activeContact]);
@@ -51,7 +46,6 @@ export default function MessagesPage() {
     var id = `U_${location?.state?.userId}`;
 
     if (id) {
-      console.log('Had Loca ID', id);
       let existingUsers = [...contacts, ...tempContact].map(
         (contact) => contact.user_id,
       );
@@ -70,7 +64,6 @@ export default function MessagesPage() {
           type: actions.FORCEUPDATE,
           payload: { item: 'tempContact', value: [...tempContact, ...user] },
         });
-        console.log('new user', user);
         setActiveContact(user[0]);
         setSelectedAcontact(user[0]?.user_id);
       }
@@ -130,7 +123,6 @@ export default function MessagesPage() {
     // }
   };
   contactData = [...contacts, ...tempContact];
-  console.log(activeContact);
   return (
     <div className='messages-page-wrapper'>
       <Layout>

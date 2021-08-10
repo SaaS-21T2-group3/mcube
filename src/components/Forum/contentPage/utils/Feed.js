@@ -17,8 +17,7 @@ const IconText = ({ icon, text, handleClick }) => (
     {text}
   </Space>
 );
-const defaultText =
-  'The Career Ready Mentoring Program connects UNSW students from their second year of study onwards with established industry professionals, providing students with a significant opportunity to focus on career development during the transition from study to work.';
+
 export default function Feed({
   index,
   title,
@@ -33,6 +32,7 @@ export default function Feed({
   lastName,
   handleClick,
   project_id,
+  dontRenderViewProject = false,
   ...rest
 }) {
   const [commentsVisible, setCommentsVisible] = useState(false);
@@ -69,10 +69,12 @@ export default function Feed({
                 handleClick={toggleComments}
                 key='list-vertical-message'
               />,
-              <Button onClick={() => handleClick('project_id', project_id)}>
-                <ExpandOutlined key='expand' />
-                View Project
-              </Button>,
+              !dontRenderViewProject ? (
+                <Button onClick={() => handleClick('project_id', project_id)}>
+                  <ExpandOutlined key='expand' />
+                  View Project
+                </Button>
+              ) : null,
             ]}
             className='feed-list-item'
           >

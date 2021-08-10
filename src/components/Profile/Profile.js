@@ -10,6 +10,8 @@ import {
   Avatar,
   Rate,
   notification,
+  Empty,
+  Spin,
 } from 'antd';
 import AppTitles from 'components/utils/AppTitles';
 import AppTabs from './AppTabs.js';
@@ -21,14 +23,14 @@ import {
   HomeTwoTone,
   PhoneOutlined,
   PhoneFilled,
-  UserOutlined,
 } from '@ant-design/icons';
+import logoimg from 'assets/logo/medium.png';
+
 import EditProfileModal from './EditProfileModal.js';
 import { getRandomColor } from '../tools/colorGenerator';
 import ViewWrapper from './utils/ViewWrapper.js';
 import AppTexts from 'components/utils/AppTexts.js';
 import { useHistory } from 'react-router-dom';
-import avatarImg from 'assets/avatar.jpg';
 import SkillsList from './utils/skillsList.js';
 import capitalize from 'components/tools/capitalize';
 import { truncateName } from 'components/tools/getTruncatedName.js';
@@ -79,9 +81,6 @@ function Profile({ user_id }) {
     });
     setAvgUserRating(rating);
   }, []);
-  let skillsList = data?.skill?.map((skil) => (
-    <Tag color={getRandomColor(skil.skill_name)}>{skil.skill_name}</Tag>
-  ));
 
   const openEditUsertModel = () => {
     // setUserId(UserId);
@@ -165,9 +164,6 @@ function Profile({ user_id }) {
               className='medium italics'
               content={data?.profile?.title}
             />
-            {/* <div className='italics' style={{ marginLeft: '1%' }}>
-              Interests: {interestsList}
-            </div> */}
             <div
               className='italics'
               style={{ marginLeft: '2px', marginBottom: '20px' }}
@@ -278,7 +274,20 @@ function Profile({ user_id }) {
       </Row>
       <AppTabs user_id={user_id} />
     </ViewWrapper>
-  ) : null;
+  ) : (
+    <Row className='empty-profile-wrapper' justify='middle' align='center'>
+      <Col className='empty-profile-container' justify='middle' align='center'>
+        <Empty
+          className='empty-search'
+          image={logoimg}
+          imageStyle={{
+            height: 60,
+          }}
+          description={<Spin />}
+        ></Empty>
+      </Col>
+    </Row>
+  );
 }
 
 export default Profile;
