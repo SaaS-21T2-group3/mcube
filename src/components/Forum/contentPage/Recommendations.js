@@ -89,7 +89,7 @@ export default function Recommendations() {
   else if (recommselectedtype === 'mentees') displayData = contentRecommMentees;
   else displayData = contentRecommMentors;
 
-  if (displayData.length > 0) {
+  if (displayData?.length > 0) {
     return (
       <>
         <ProjectModal
@@ -123,7 +123,7 @@ export default function Recommendations() {
           threshold={150}
         >
           <Row className='recommendation-container' gutter={[16, 16]}>
-            {displayData.map((recomm, index) =>
+            {displayData?.map((recomm, index) =>
               recommselectedtype !== 'project' ? (
                 <RecommMM
                   key={recomm?.first_name + index}
@@ -190,7 +190,7 @@ export default function Recommendations() {
         }}
         description={
           <span>
-            You need minimum of three skill added to your profile yo get the
+            You need minimum of three skill added to your profile to get
             recommendation.
           </span>
         }

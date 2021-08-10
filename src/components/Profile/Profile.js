@@ -108,7 +108,7 @@ function Profile({ user_id }) {
   };
 
   return data ? (
-    <ViewWrapper grid={true}>
+    <ViewWrapper key={user_id ? user_id : userId} grid={true}>
       {user_id === undefined && (
         <EditProfileModal
           isModalVisible={isModalVisible}
@@ -172,7 +172,7 @@ function Profile({ user_id }) {
             </div>
 
             {avgUserRating != null && (
-              <Rate defaultValue={avgUserRating} disabled />
+              <Rate key={avgUserRating} defaultValue={avgUserRating} disabled />
             )}
           </div>
         </Col>

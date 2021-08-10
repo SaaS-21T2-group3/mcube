@@ -276,7 +276,7 @@ body {
   @media screen and (max-width: 768px) {
     justify-content: flex-end;
     .ant-page-header-heading {
-      justify-content: space-around;
+      justify-content: space-between;
     }
   }
 }
@@ -326,7 +326,7 @@ body {
 .new-post-button {
   position: absolute;
   bottom: 0;
-  right: 5px;
+  right: 25px;
 }
 .new-post-submit {
   float: right;
@@ -395,6 +395,11 @@ body {
 }
 .comment-timestamp {
   // font-size: ;
+}
+.comment-count-container {
+  .ant-space-item::hover {
+    color: $primary-color;
+  }
 }
 .recommendation-container {
   .ant-card {

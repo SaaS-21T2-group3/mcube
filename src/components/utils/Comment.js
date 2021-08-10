@@ -58,11 +58,9 @@ export default function Comment({ item }) {
           }
           description={<AppTexts content={item.content} />}
         />
-        <AppTexts
-          // containerStyle={{ 'padding-left': '50px' }}
-          style={{ paddingLeft: '58px' }}
-          content={item.message}
-        />
+        <div style={{ marginLeft: '58px' }}>
+          <AppTexts content={item.message} />
+        </div>
       </List.Item>
     </>
   );

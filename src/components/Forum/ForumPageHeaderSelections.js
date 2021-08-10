@@ -137,19 +137,13 @@ function ForumPageHeaderAddPost({ ...rest }) {
     });
   };
   const [content, setcontent] = useState('');
-  const [userId, setuserId] = useState('1');
   const [title, settitle] = useState('');
   const [projectId, setprojectId] = useState('');
   const { addPostDraftState, addPostLoading } = useSelector(
     (state) => state.forumReducer,
   );
+  const { userId } = useSelector((state) => state.authenticateReducer);
   const dispatch = useDispatch();
-  //   {
-  //   "content": "mentoring of projects",
-  //   "user_id": 2,
-  //   "title": "project mentoring",
-  // "project_id":"pj_1"
-  // }
   const submitPost = () => {
     dispatch({
       type: actions.TOGGLESTATE,

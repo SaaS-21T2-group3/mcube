@@ -64,10 +64,10 @@ export default function Feed({
             key={title + index}
             actions={[
               <IconText
+                key={commentCount}
                 icon={MessageOutlined}
                 text={commentCount}
                 handleClick={toggleComments}
-                key='list-vertical-message'
               />,
               !dontRenderViewProject ? (
                 <Button onClick={() => handleClick('project_id', project_id)}>
