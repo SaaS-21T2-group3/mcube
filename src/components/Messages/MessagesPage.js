@@ -124,6 +124,9 @@ export default function MessagesPage() {
     // }
   };
   contactData = removeDuplicate([...contacts, ...tempContact], 'user_id');
+  contactData = contactData.filter(
+    (contact) => contact.user_id !== `U_${userId}`,
+  );
   return (
     <div className='messages-page-wrapper'>
       <Layout>
