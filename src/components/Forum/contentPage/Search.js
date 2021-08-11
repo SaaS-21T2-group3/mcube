@@ -43,7 +43,7 @@ export default function Search() {
 
   useEffect(() => {
     let results = searchData;
-    results = results.filter((result) => result.score > 0);
+    results = results.filter((result) => result.score >= 0);
     setData(results);
     return () => {};
   }, [searchData]);

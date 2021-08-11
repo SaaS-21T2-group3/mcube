@@ -133,7 +133,7 @@ function Reducer(state = initialState, action) {
     case actions.UPDATESEARCHSTRING:
       return { ...state, searchString: action.searchString };
     case actions.SEARCH_SUCCESS:
-      return { ...state, searchData: [...action.data], searchLoading: false };
+      return { ...state, searchData: action.data, searchLoading: false };
 
     case actions.SEARCH_FAILURE:
       return { ...state, searchLoading: false };
