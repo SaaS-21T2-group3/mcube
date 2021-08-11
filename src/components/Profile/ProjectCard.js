@@ -9,7 +9,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import actions from 'redux/Profile/actions';
 
-function ProjectCard({ project_data, openProjectModel }) {
+function ProjectCard({ project_data, openProjectModel, user_id }) {
   const { userId } = useSelector((state) => state.authenticateReducer);
   const dispatch = useDispatch();
   const { confirm } = Modal;
@@ -38,31 +38,33 @@ function ProjectCard({ project_data, openProjectModel }) {
       },
     });
   }
-
+  console.log(user_id, user_id, userId);
   return (
-    <Col lg={12} md={12} sm={24} xs={24}>
+    <Col lg={12} md={24} sm={24} xs={24}>
       <Card
         title={project_data.title}
         className='list-card'
         style={{ borderWidth: 'medium', height: '100%' }}
         actions={[
-          <Button
-            type={
-              project_data.created_by.split('_')[1] === userId
-                ? 'danger'
-                : 'primary'
-            }
-            onClick={showConfirm}
-          >
-            {project_data.created_by.split('_')[1] === userId ? (
-              <DeleteOutlined key='delete' />
-            ) : (
-              <CloseCircleOutlined key='unfollow' />
-            )}
-            {project_data.created_by.split('_')[1] === userId
-              ? 'Delete'
-              : 'Unfollow'}
-          </Button>,
+          user_id && user_id !== userId.split('_')[1] ? null : (
+            <Button
+              type={
+                project_data.created_by.split('_')[1] === userId
+                  ? 'danger'
+                  : 'primary'
+              }
+              onClick={showConfirm}
+            >
+              {project_data.created_by.split('_')[1] === userId ? (
+                <DeleteOutlined key='delete' />
+              ) : (
+                <CloseCircleOutlined key='unfollow' />
+              )}
+              {project_data.created_by.split('_')[1] === userId
+                ? 'Delete'
+                : 'Unfollow'}
+            </Button>
+          ),
           <Button onClick={() => handleClick(project_data.project_id)}>
             <ExpandOutlined key='expand' />
             View

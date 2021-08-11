@@ -1,4 +1,4 @@
-import { Tag } from 'antd';
+import { Space, Tag } from 'antd';
 import { getRandomColor } from 'components/tools/colorGenerator';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,8 +23,12 @@ export default function SkillsList({ userId }) {
     return () => {};
   }, [userSkillList]);
 
-  let skillsList = skills?.map((skill) => (
-    <Tag color={getRandomColor(skill)}>{skill}</Tag>
-  ));
+  let skillsList = (
+    <Space wrap>
+      {skills?.map((skill) => (
+        <Tag color={getRandomColor(skill)}>{skill}</Tag>
+      ))}
+    </Space>
+  );
   return <div>{skillsList}</div>;
 }

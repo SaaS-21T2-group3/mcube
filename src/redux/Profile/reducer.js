@@ -11,13 +11,22 @@ const initialState = {
   userProjectListTemp: {},
   userSkillListTemp: {},
   userReviewsListTemp: {},
+  userName: sessionStorage.getItem('userName'),
 };
 
 function Reducer(state = initialState, action) {
   switch (action.type) {
     //PROFILE
     case actions.GETUSERDETAILS_SUCCESS:
-      return { ...state, profileData: action.data.data };
+      console.log(action.data?.data?.profile);
+      var firstName = action.data?.data?.profile?.first_name;
+      var lastName = action.data?.data?.profile?.last_name;
+      sessionStorage.setItem('userName', `${firstName} ${lastName}`);
+      return {
+        ...state,
+        profileData: action.data.data,
+        userName: `${firstName} ${lastName}`,
+      };
     case actions.GETTEMPUSERDETAILS_SUCCESS:
       let newprofileDataTemp = { ...state.profileDataTemp };
       newprofileDataTemp[action.userId] = action.data.data;

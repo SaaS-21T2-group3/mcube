@@ -24,7 +24,7 @@ export default function Editor({
           />
         </Form.Item>
       </Col>
-      <Col flex='none'>
+      <Col flex='none' className='message-send-container'>
         <Buttons
           htmlType='submit'
           loading={submitting}

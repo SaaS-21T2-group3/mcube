@@ -9,7 +9,6 @@ import {
   Tag,
   Avatar,
   Button,
-  Tooltip,
 } from 'antd';
 import { getRequest, postRequest, deleteRequest } from 'Config/axiosClient';
 import { getRandomColor } from 'components/tools/colorGenerator';
@@ -17,6 +16,8 @@ import { dateToUTC } from 'components/tools/date';
 import AppTitles from 'components/utils/AppTitles';
 import AppTexts from 'components/utils/AppTexts';
 import { useSelector } from 'react-redux';
+import Collaborators from 'components/utils/Collaborators';
+import Feeds from 'components/Forum/contentPage/Feeds';
 function ProjectModal({
   isProjectModalVisible,
   projectId,
@@ -168,24 +169,17 @@ function ProjectModal({
                   >
                     {collaborators &&
                       collaborators.map((value) => (
-                        <Tooltip
-                          title={`${value.first_name} ${value.last_name}`}
-                          placement='bottom'
-                        >
-                          <Avatar
-                            style={{
-                              backgroundColor: getRandomColor(
-                                `${value.first_name} ${value.last_name}`,
-                              ),
-                            }}
-                            size={30}
-                            icon={<UserOutlined />}
-                          />
-                        </Tooltip>
+                        <Collaborators value={value} />
                       ))}
                   </Avatar.Group>
                 </Col>
               </Row>
+            </Col>
+          </Row>
+          <Row xs={24}>
+            <AppTitles className='strong medium' content='Related posts' />
+            <Col xs={24}>
+              <Feeds projectId={projectId} />
             </Col>
           </Row>
         </Modal>

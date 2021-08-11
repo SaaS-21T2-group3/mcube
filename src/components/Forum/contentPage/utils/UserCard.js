@@ -32,53 +32,51 @@ export default function UserCard({
     setIsUserModalVisible(false);
   };
   return (
-    <>
+    <Col lg={8} md={12} sm={24} xs={24}>
       <UserModal
         isModalVisible={isUserModalVisible}
         userID={idForModal}
         handleCancel={handleCancel}
       />
-      <Col lg={8} md={12} sm={24} xs={24}>
-        <Skeleton loading={loading} avatar active>
-          <Card
-            style={{ width: 300, marginTop: 16 }}
-            className='list-card'
-            actions={[
-              null,
-              <Buttons
-                handleClick={() => handleMoreDetails('user_id', user_id)}
-                content={
-                  <>
-                    <ExpandOutlined key='expand' /> View Profile
-                  </>
-                }
-              />,
-            ]}
-          >
-            <Skeleton loading={loading} avatar active>
-              <Meta
-                avatar={
-                  <Avatar
-                    icon={<UserOutlined />}
-                    style={{
-                      backgroundColor: getRandomColor(
-                        `${first_name} ${last_name}`,
-                      ),
-                    }}
-                  />
-                }
-                title={`${first_name} ${last_name}`}
-                description={title}
-                style={{ textAlign: 'left' }}
-              />
-            </Skeleton>
-            <Tag className='card-user-type' color='#3ca6b5'>
-              User
-            </Tag>
-          </Card>
-        </Skeleton>
-      </Col>
-    </>
+      <Skeleton loading={loading} avatar active>
+        <Card
+          className='list-card'
+          style={{ marginTop: '16px' }}
+          actions={[
+            null,
+            <Buttons
+              handleClick={() => handleMoreDetails('user_id', user_id)}
+              content={
+                <>
+                  <ExpandOutlined key='expand' /> View Profile
+                </>
+              }
+            />,
+          ]}
+        >
+          <Skeleton loading={loading} avatar active>
+            <Meta
+              avatar={
+                <Avatar
+                  icon={<UserOutlined />}
+                  style={{
+                    backgroundColor: getRandomColor(
+                      `${first_name} ${last_name}`,
+                    ),
+                  }}
+                />
+              }
+              title={`${first_name} ${last_name}`}
+              description={title}
+              style={{ textAlign: 'left' }}
+            />
+          </Skeleton>
+          <Tag className='card-user-type' color='#3ca6b5'>
+            User
+          </Tag>
+        </Card>
+      </Skeleton>
+    </Col>
   );
 }
 // data.city

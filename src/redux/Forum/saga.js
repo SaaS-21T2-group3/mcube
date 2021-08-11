@@ -76,7 +76,10 @@ function* getRecomm(action) {
       });
     } else throw response.statusText;
   } catch (e) {
-    yield put({ type: actions.GETRECOMM_FAILURE, e });
+    yield put({
+      type: actions.GETRECOMM_FAILURE,
+      e: 'Failed to collect Recommendations',
+    });
   }
 }
 function* addRecomm(action) {
