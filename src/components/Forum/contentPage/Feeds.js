@@ -10,7 +10,7 @@ import ProjectModal from 'components/Profile/ProjectModal';
 import sorter from 'components/tools/sorter';
 import capitalize from 'components/tools/capitalize';
 
-export default function Feeds() {
+export default function Feeds({ projectId }) {
   const dispatch = useDispatch();
   const { contentFeeds, feedLoading, feedSortBy, feedSearchString } =
     useSelector((state) => state.forumReducer);
@@ -43,7 +43,16 @@ export default function Feeds() {
   useEffect(() => {
     // eslint-disable-next-line
     // eslint-disable-next-line
-    setData([...currentContentFeed.current, ...getDummy()]);
+    // projectId;
+    var newData = [...currentContentFeed.current, ...getDummy()];
+    if (projectId) {
+      console.log(projectId === data?.project_id);
+
+      newData = newData.filter((data) => {
+        return data?.project_id === projectId;
+      });
+    }
+    setData(newData);
     dispatch({
       type: actions.GETFEEDS,
       params: { filters: [], type: [] },
@@ -53,8 +62,15 @@ export default function Feeds() {
 
   useEffect(() => {
     let sortedContent = sorter([...contentFeeds], feedSortBy);
+    var newData = [...sortedContent];
+    if (projectId) {
+      console.log(projectId === data?.project_id);
 
-    setData(sortedContent);
+      newData = newData.filter((data) => {
+        return data?.project_id === projectId;
+      });
+    }
+    setData(newData);
     return () => {};
   }, [contentFeeds]);
   useEffect(() => {
@@ -64,7 +80,13 @@ export default function Feeds() {
       ['title'],
     );
     let sortedContent = sorter([...filteredContent], feedSortBy);
-    setData(sortedContent);
+    var newData = [...sortedContent];
+    if (projectId) {
+      newData = newData.filter((data) => {
+        return data?.project_id === projectId;
+      });
+    }
+    setData(newData);
     return () => {};
   }, [feedSortBy, feedSearchString]);
 
@@ -109,7 +131,6 @@ export default function Feeds() {
         >
           <Space size={10} className='full-wide' direction='vertical'>
             {data.map((feed, index) => {
-              console.log(feed);
               return (
                 <Feed
                   key={feed.post_id}
@@ -128,6 +149,7 @@ export default function Feeds() {
                   postId={feed.post_id}
                   userId={feed.user_id}
                   handleClick={handleMoreDetails}
+                  dontRenderViewProject={projectId ? true : false}
                 />
               );
             })}

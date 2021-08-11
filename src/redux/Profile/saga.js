@@ -194,7 +194,6 @@ function* getUserSkills(action) {
     const response = yield call(() =>
       getRequest(`user/skills/${action.payload.user_id}`),
     );
-    console.log('calling Saga', response);
 
     if (response.status === 200)
       yield put({ type: actions.GETUSERSKILLS_SUCCESS, data: response.data });

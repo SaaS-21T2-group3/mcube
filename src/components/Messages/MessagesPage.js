@@ -12,6 +12,7 @@ import AppTexts from 'components/utils/AppTexts';
 import { useLocation } from 'react-router-dom';
 import { getRequest } from 'Config/axiosClient';
 import MessageSearchSelect from 'components/utils/MessageSearchSelect';
+import removeDuplicate from 'components/tools/removeDuplicate';
 
 const { Content, Sider } = Layout;
 export default function MessagesPage() {
@@ -27,11 +28,6 @@ export default function MessagesPage() {
   const [selectedAcontact, setSelectedAcontact] = useState(contacts?.[0]);
 
   const location = useLocation();
-  useEffect(() => {
-    console.log(location.pathname); // result: '/secondpage'
-    console.log(location.search); // result: '?query=abc'
-    console.log(location?.state?.userId); // result: 'some_value'
-  }, [location]);
   useEffect(() => {
     setSelectedAcontact(activeContact?.user_id);
     return () => {};
@@ -50,8 +46,7 @@ export default function MessagesPage() {
     });
     var id = `U_${location?.state?.userId}`;
 
-    if (id) {
-      console.log('Had Loca ID', id);
+    if (location?.state?.userId) {
       let existingUsers = [...contacts, ...tempContact].map(
         (contact) => contact.user_id,
       );
@@ -70,7 +65,6 @@ export default function MessagesPage() {
           type: actions.FORCEUPDATE,
           payload: { item: 'tempContact', value: [...tempContact, ...user] },
         });
-        console.log('new user', user);
         setActiveContact(user[0]);
         setSelectedAcontact(user[0]?.user_id);
       }
@@ -129,8 +123,10 @@ export default function MessagesPage() {
     setSelectedAcontact(selectedContact?.user_id);
     // }
   };
-  contactData = [...contacts, ...tempContact];
-  console.log(activeContact);
+  contactData = removeDuplicate([...contacts, ...tempContact], 'user_id');
+  contactData = contactData.filter(
+    (contact) => contact.user_id !== `U_${userId}`,
+  );
   return (
     <div className='messages-page-wrapper'>
       <Layout>

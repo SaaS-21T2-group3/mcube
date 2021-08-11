@@ -117,7 +117,8 @@ function Projects({ user_id }) {
           <Row gutter={[16, 16]}>
             {data?.map((i, index) => (
               <ProjectCard
-                key={index}
+                user_id={user_id}
+                key={i?.project_id}
                 project_data={i}
                 openProjectModel={openProjectModel}
               />

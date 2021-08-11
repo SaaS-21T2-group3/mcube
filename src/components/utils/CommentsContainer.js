@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import actions from 'redux/Forum/actions';
 import { getRequest } from 'Config/axiosClient';
 import { useInterval } from 'components/tools/useInterval';
+import Comment from './Comment';
 
 const { TextArea } = Input;
 
@@ -78,7 +79,6 @@ export default function CommentsContainer({ postId, defaultComments = [] }) {
     setNewComment(e.target.value);
   };
   const handleInfiniteOnLoad = (e) => {};
-  console.log(comments);
   return (
     <Space direction='vertical' className='comment-list-spacer'>
       <div className='comments-infinite-container'>
@@ -90,47 +90,10 @@ export default function CommentsContainer({ postId, defaultComments = [] }) {
           useWindow={false}
         >
           <List
+            key={comments?.length}
             itemLayout='vertical'
-            dataSource={[...comments]}
-            renderItem={(item) => (
-              <List.Item key={item.comment_id}>
-                {console.log(item)}
-                <List.Item.Meta
-                  avatar={
-                    <Avatar
-                      icon={<UserOutlined />}
-                      style={{
-                        backgroundColor: getRandomColor(item.message),
-                      }}
-                    />
-                  }
-                  title={
-                    <>
-                      <AppTexts
-                        containerStyles='comment-name-container'
-                        className='medium'
-                        content={`${item.first_name || 'firname'} ${
-                          item.last_name || 'last name'
-                        }`}
-                      ></AppTexts>
-                      <AppTexts
-                        containerStyles='comment-timestamp-container'
-                        className='comment-timestamp xsmall'
-                        content={moment(new Date(item.timestamp * 1000))
-                          .subtract(0, 'days')
-                          .fromNow()}
-                      />
-                    </>
-                  }
-                  description={<AppTexts content={item.content} />}
-                />
-                <AppTexts
-                  // containerStyle={{ 'padding-left': '50px' }}
-                  style={{ paddingLeft: '58px' }}
-                  content={item.message}
-                />
-              </List.Item>
-            )}
+            dataSource={comments}
+            renderItem={(item) => <Comment key={item.comment_id} item={item} />}
           >
             {loading && hasMore && (
               <div className='demo-loading-container'>
