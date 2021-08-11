@@ -77,7 +77,7 @@ function Projects({ user_id }) {
   };
 
   return (
-    <>
+    <div key={user_id ? user_id : userId}>
       <ProjectModal
         isProjectModalVisible={isProjectModalVisible}
         projectId={projectId}
@@ -133,7 +133,7 @@ function Projects({ user_id }) {
           description={<span>No Projects yet</span>}
         ></Empty>
       )}
-    </>
+    </div>
   );
 }
 

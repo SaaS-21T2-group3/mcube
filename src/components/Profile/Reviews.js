@@ -84,7 +84,7 @@ function Reviews({ user_id }) {
   };
 
   return (
-    <>
+    <div key={user_id ? user_id : userId}>
       <PageHeader
         className='forum-page-header'
         title='Reviews'
@@ -144,6 +144,7 @@ function Reviews({ user_id }) {
       )}
       {data && data?.length !== 0 ? (
         <List
+          key={user_id ? user_id : userId}
           className='demo-loadmore-list'
           style={{ minHeight: '350px' }}
           itemLayout='horizontal'
@@ -201,7 +202,7 @@ function Reviews({ user_id }) {
           description={<span>No reviews yet</span>}
         ></Empty>
       )}
-    </>
+    </div>
   );
 }
 

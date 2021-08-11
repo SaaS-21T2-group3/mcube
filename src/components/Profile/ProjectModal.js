@@ -158,7 +158,7 @@ function ProjectModal({
             <Col span={12}>
               <Row>
                 <Col span={24}>
-                  <Text strong>Contributors:</Text>
+                  <Text strong>Followers:</Text>
                 </Col>
                 <Col span={24} style={{ marginTop: '1%' }}>
                   <Avatar.Group

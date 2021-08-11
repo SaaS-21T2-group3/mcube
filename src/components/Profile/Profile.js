@@ -35,7 +35,7 @@ function Profile({ user_id }) {
   let history = useHistory();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [data, setData] = useState(null);
-  const [avgUserRating, setAvgUserRating] = useState(null);
+  const [avgUserRating, setAvgUserRating] = useState(0);
   const { userId } = useSelector((state) => state.authenticateReducer);
 
   const { profileData, profileDataTemp, rating } = useSelector(
@@ -159,10 +159,7 @@ function Profile({ user_id }) {
             >
               skills: <SkillsList userId={user_id ? user_id : userId} />
             </div>
-
-            {avgUserRating != null && (
-              <Rate defaultValue={avgUserRating} disabled />
-            )}
+            <Rate key={rating} value={rating} disabled />
           </div>
         </Col>
         <Col

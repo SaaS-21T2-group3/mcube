@@ -45,9 +45,9 @@ function Skills2({ user_id }) {
     console.log(key);
   }
   return (
-    <>
+    <div key={user_id ? user_id : userId}>
       <PageHeader className='forum-page-header' title='Skills'></PageHeader>
-      <Row gutter={(16, 16)}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} style={{ marginBottom: '40px' }}>
           <Search
             showSearch
@@ -72,7 +72,7 @@ function Skills2({ user_id }) {
           />
         </Col>
       </Row>
-    </>
+    </div>
   );
 }
 
